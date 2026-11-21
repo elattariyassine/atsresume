@@ -12,16 +12,3 @@ This fork extends [sauravhathi/atsresume](https://github.com/sauravhathi/atsresu
 | 5 | Resume language (English / French) | [05-resume-language.md](05-resume-language.md) |
 | 6 | Small changes | [06-small-changes.md](06-small-changes.md) |
 | 7 | Editor panel redesign | [07-editor-panel.md](07-editor-panel.md) |
-
-## Rolling back
-
-The fork as it was before the rebuild on top of the restructured upstream is preserved in two places:
-
-- the `pre-upstream-sync` tag (`git reset --hard pre-upstream-sync` returns `main` to it)
-- a full `git bundle` backup outside the repository: `../atsresume-backup-2026-11-21.bundle`
-
-To restore from the bundle into a fresh folder:
-
-```bash
-git clone atsresume-backup-2026-11-21.bundle atsresume-restored
-```
