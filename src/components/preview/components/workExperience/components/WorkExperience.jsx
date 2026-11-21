@@ -12,6 +12,14 @@ const Draggable = dynamic(
 );
 
 const WorkExperience = ({item, index}) => {
+  const workMeta = [
+    item.location?.trim(),
+    item.workType && item.workType !== "None" ? item.workType : null,
+  ].filter(Boolean).join(" · ");
+  const technologies = (item.technologies || []).filter(
+    (technology) => technology.category?.trim() || technology.tech?.trim()
+  );
+
   return (
     <Draggable
       key={`${item.company}-${index}`}
@@ -36,7 +44,10 @@ const WorkExperience = ({item, index}) => {
               id={`work-experience-start-end-date`}
             />
           </div>
-          <p className="content">{item.position}</p>
+          <div className="flex justify-between items-baseline gap-2">
+            <p className="content">{item.position}</p>
+            {workMeta && <p className="sub-content text-right">{workMeta}</p>}
+          </div>
           <p className="content hyphens-auto">{item.description}</p>
 
           <Droppable
@@ -84,6 +95,20 @@ const WorkExperience = ({item, index}) => {
               </ul>
             )}
           </Droppable>
+
+          {technologies.length > 0 && (
+            <div className="mb-1">
+              <p className="content i-semi-bold">Technologies</p>
+              {technologies.map((technology, techIndex) => (
+                <p key={techIndex} className="content">
+                  {technology.category && (
+                    <span className="underline">{technology.category}:</span>
+                  )}{" "}
+                  {technology.tech}
+                </p>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </Draggable>

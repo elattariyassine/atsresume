@@ -115,6 +115,10 @@
     font-weight: 700 !important;
 }
 
+.i-semi-bold{
+    font-weight: 600 !important;
+}
+
 @media print {
     .exclude-print {
         display: none;

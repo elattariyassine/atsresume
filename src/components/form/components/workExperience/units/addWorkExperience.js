@@ -10,6 +10,9 @@ export const addWorkExperience = (resumeData, setResumeData) => {
         keyAchievements: "",
         startYear: "",
         endYear: "",
+        workType: "None",
+        location: "",
+        technologies: [],
       },
     ],
   });

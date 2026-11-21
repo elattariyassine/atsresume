@@ -25,15 +25,16 @@ Older resume files without these fields must load without errors (see [03-load-s
 
 ## Form
 
-Inside each work experience block, after Job Title:
+Inside each work experience block, after Job Title, on one row:
 
-1. **Work type** select: None / Remote / In-Office / Hybrid.
+1. **Work type** select: *Work type: not shown* / Remote / In-Office / Hybrid.
 2. **Location** text input.
 
 After Key Achievements, a **Technologies Used** sub-section:
 
-- one row per technology with two inputs side by side: *Category (e.g. Frontend, Backend)* and *Technologies (e.g. React, Node.js)*
-- add and remove buttons; new work experiences start with no technology rows
+- one row per technology with two inputs side by side, *Category (e.g. Frontend)* and *Technologies (e.g. React, Node.js)*, and a delete button for that row (matching upstream's per-row delete buttons)
+- an add button under the rows; new work experiences start with no technology rows
+- rows with both fields empty are not shown in the preview
 
 ## Preview (two-column layout)
 

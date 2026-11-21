@@ -35,7 +35,14 @@ const DefaultResumeData = {
       "description": "Torph TTC is a global software company that offers user interface UI development tools and components for a range of developer applications across all platforms.",
       "keyAchievements": "Created and maintained 10 web applications for numerous national and foreign clients.\nEnsured that the user interfaces and user experience of the software applications developed by the team met at least 80% of users expectations.\nCreated and analyzed 500 unit test cases.\nDeveloped python scripts to automate image's noise-reduction process which helped improve research analysis time by 40%.\nEstablished and lead a team of 10 people; covering every key role in the early stages.",
       "startYear": "2023-02-16",
-      "endYear": "2023-02-21"
+      "endYear": "2023-02-21",
+      "workType": "Remote",
+      "location": "San Francisco, CA",
+      "technologies": [
+        { "category": "Frontend", "tech": "React, TypeScript, CSS3" },
+        { "category": "Backend", "tech": "Node.js, Express, MongoDB" },
+        { "category": "Testing", "tech": "Jest, Cypress" }
+      ]
     },
     {
       "company": "Reilty Group",
@@ -43,7 +50,13 @@ const DefaultResumeData = {
       "description": "Reilty Group is an industry-leading provider of online gambling software and solutions.",
       "keyAchievements": "Increased by 35% the reach of users to the platform, over the installation of the web platform in mobile devices.\nDelivered 30 web solutions.\nReplaced 1 full-time web developer under part-time employment achieving a productivity gain of over 60% as measured by working hours.\nWorked with more than 4 different teams at different points of time and provided end-to-end solutions for clients.",
       "startYear": "2023-02-22",
-      "endYear": "2023-03-09"
+      "endYear": "2023-03-09",
+      "workType": "In-Office",
+      "location": "New York, NY",
+      "technologies": [
+        { "category": "Frontend", "tech": "Vue.js, JavaScript, HTML5" },
+        { "category": "Mobile", "tech": "React Native" }
+      ]
     },
     {
       "company": "HellX",
@@ -51,7 +64,13 @@ const DefaultResumeData = {
       "description": "Heller is a Software Editor specialized in logistics management.",
       "keyAchievements": "Developed several automation systems - saved over $50,000 annually.\nJoined the team as #10 employee as a developer working directly with the biggest customers.\nInvolved in coding as per the requirement, delivered well ahead of time which saved project cost by 20%.\nReduced database size by nearly 50% and improved its performance by 20%.\nDelivery time of good reduced by 50%.",
       "startYear": "2023-02-22",
-      "endYear": "2023-03-09"
+      "endYear": "2023-03-09",
+      "workType": "Hybrid",
+      "location": "",
+      "technologies": [
+        { "category": "Backend", "tech": "Python, Django, PostgreSQL" },
+        { "category": "DevOps", "tech": "Docker, AWS" }
+      ]
     }
   ],
   projects: [],

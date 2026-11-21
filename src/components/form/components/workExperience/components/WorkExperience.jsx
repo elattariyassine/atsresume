@@ -3,6 +3,14 @@ import {handleWorkExperience} from "../units/handleWorkExperience";
 import {ResumeContext} from "../../../../builder";
 import {BsTrash3} from "react-icons/bs";
 import {removeWorkExperience} from "../units/removeResumeExperience";
+import Technologies from "./Technologies";
+
+const WORK_TYPES = [
+  {value: "None", label: "Work type: not shown"},
+  {value: "Remote", label: "Remote"},
+  {value: "In-Office", label: "In-Office"},
+  {value: "Hybrid", label: "Hybrid"},
+];
 
 const WorkExperience = ({workExperience, index}) => {
   const {resumeData, setResumeData,} = useContext(ResumeContext);
@@ -34,6 +42,31 @@ const WorkExperience = ({workExperience, index}) => {
             handleWorkExperience(resumeData, setResumeData, e, index)
           }
         />
+        <div className="flex gap-2">
+          <select
+            name="workType"
+            aria-label="Work type"
+            className="flex-1 min-w-0 other-input"
+            value={workExperience.workType || "None"}
+            onChange={(e) =>
+              handleWorkExperience(resumeData, setResumeData, e, index)
+            }
+          >
+            {WORK_TYPES.map(({value, label}) => (
+              <option key={value} value={value}>{label}</option>
+            ))}
+          </select>
+          <input
+            type="text"
+            placeholder="Location"
+            name="location"
+            className="flex-1 min-w-0 other-input"
+            value={workExperience.location || ""}
+            onChange={(e) =>
+              handleWorkExperience(resumeData, setResumeData, e, index)
+            }
+          />
+        </div>
         <textarea
           type="text"
           placeholder="Description"
@@ -55,6 +88,7 @@ const WorkExperience = ({workExperience, index}) => {
             handleWorkExperience(resumeData, setResumeData, e, index)
           }
         />
+        <Technologies technologies={workExperience.technologies} workIndex={index}/>
         <div
           className={"w-fill flex-wrap-gap-2"}
         >
