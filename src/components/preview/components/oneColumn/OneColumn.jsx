@@ -464,14 +464,25 @@ const TechnicalSkills = ({ section, grouped, tr }) => (
 const SecondarySkills = ({ sections, grouped, tr }) => {
   if (sections.length === 0) return null;
 
-  const title =
-    sections.length > 1
-      ? `${tr.t("softSkills")} / ${tr.t("additionalSkills")}`
-      : tr.skillTitle(sections[0].title);
+  // Grouped lines don't name their section, so each section keeps its own title.
+  if (grouped) {
+    return sections.map((section, index) => (
+      <OneColumnSection
+        key={index}
+        title={tr.skillTitle(section.title)}
+        className="cv-one-column-secondary-skills"
+      >
+        <SkillLines sections={[section]} grouped tr={tr} />
+      </OneColumnSection>
+    ));
+  }
+
+  // Simple lines are prefixed with their section title, so one section is enough.
+  const title = sections.map((section) => tr.skillTitle(section.title)).join(" / ");
 
   return (
     <OneColumnSection title={title} className="cv-one-column-secondary-skills">
-      <SkillLines sections={sections} grouped={grouped} tr={tr} />
+      <SkillLines sections={sections} grouped={false} tr={tr} />
     </OneColumnSection>
   );
 };
@@ -522,13 +533,9 @@ const OneColumn = ({ resumeData }) => {
   const tr = useTranslation();
   const grouped = Boolean(resumeData.useGroupedSkills);
   const skills = getSkillSections(resumeData);
-  const technicalIndex = skills.findIndex(
-    (section) =>
-      typeof section.title === "string" &&
-      section.title.toLowerCase().includes("technical")
-  );
-  const technicalSkills = technicalIndex >= 0 ? skills[technicalIndex] : null;
-  const secondarySkills = skills.filter((_, index) => index !== technicalIndex);
+  // The first skill section (Technical Skills by default, whatever the user
+  // renamed it to) is the main one; reordering sections changes which it is.
+  const [technicalSkills = null, ...secondarySkills] = skills;
   const education = (resumeData.education || []).filter(
     (item) =>
       hasValue(item.school) ||

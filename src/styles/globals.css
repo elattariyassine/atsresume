@@ -306,6 +306,16 @@
     background: white;
 }
 
+.print-sheet {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.print-sheet td {
+    padding: 0;
+    vertical-align: top;
+}
+
 @media print {
     .exclude-print {
         display: none;
@@ -315,13 +325,60 @@
         padding: 0;
     }
 
+    /* No page margin: browsers then have no room for their URL/date/title
+       header and footer. Spacing comes from .preview padding (sides) and the
+       repeating .print-sheet-gap rows (top and bottom of every page). */
     @page {
         size: A4;
-        margin: 10mm;
+        margin: 0;
     }
 
     .preview {
         overflow-y: visible !important;
+    }
+
+    .preview.rm-padding-print {
+        padding: 0 12mm;
+    }
+
+    .print-sheet-gap {
+        height: 10mm;
+    }
+
+    /* The on-screen split view (form + preview side by side) must not
+       constrain the printed page. */
+    .builder-layout {
+        display: block;
+        max-width: none;
+        height: auto;
+    }
+
+    .preview {
+        position: static !important;
+        max-width: none !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* Let long jobs and projects continue on the next page instead of
+       jumping there whole, but keep their header with the first lines and
+       never split a bullet. */
+    .cv-one-column-job {
+        break-inside: auto;
+        page-break-inside: auto;
+    }
+
+    .cv-one-column-job-company,
+    .cv-one-column-job-meta {
+        break-after: avoid;
+        page-break-after: avoid;
+    }
+
+    .cv-one-column-bullets li,
+    .cv-one-column-education-item,
+    .cv-one-column-skill-line {
+        break-inside: avoid;
+        page-break-inside: avoid;
     }
 
     .cv-one-column-section-title {

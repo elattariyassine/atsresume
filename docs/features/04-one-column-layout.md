@@ -15,11 +15,11 @@ A second preview layout: a single column in plain document order. Applicant trac
 3. **Summary**
 4. **Work Experience**: per job, the company in bold; a meta line `position · location · work type · date range`; description; key achievements as bullets; a `Technologies: Category: tech · Category: tech` line.
 5. **Projects**: name in bold; date range; link; description; key achievements as bullets.
-6. **Technical Skills**: one line per list or group, `Label: values`, label semibold.
+6. **Main skills**: the first skill section (Technical Skills by default, under whatever title the user gave it), one line per list or group, `Label: values`, label semibold.
 7. **Education**: `School - Degree` in bold, date range below.
 8. **Certifications**: bulleted list.
 9. **Languages**: values joined with ` · `.
-10. **Soft / Additional Skills**: same format as technical skills; title is the section name, or "Soft Skills / Additional Skills" when both have content.
+10. **Other skill sections**: same format. Grouped skills get one section per skill section, under its own title; simple skills share one section titled with the section names joined by " / ", each line prefixed with its section name.
 
 ## Rules
 
@@ -28,5 +28,5 @@ A second preview layout: a single column in plain document order. Applicant trac
 - Links without a protocol get `http://` prepended.
 - Work experiences, projects and their key achievements can be reordered by drag and drop, like the two-column layout. Key achievements and certifications stay editable in place.
 - Section titles: uppercase, small, letter-spaced, fuchsia, thin bottom border.
-- Print: a job or project is not split across pages; a section title is never the last line of a page.
+- Print: a long job or project may continue on the next page, but its company/meta lines stay with what follows, a bullet is never split, and a section title is never the last line of a page.
 - Dates use the resume language (see [05](05-resume-language.md)) and the format `Mon YYYY - Mon YYYY` or `... - Present`.
