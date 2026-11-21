@@ -9,6 +9,12 @@
         color-scheme: light;
     }
 
+    /* Classes like `flex` would otherwise override the hidden attribute
+       (collapsed editor sections and cards). */
+    [hidden] {
+        display: none !important;
+    }
+
     body {
         @apply font-[sans-serif] bg-white text-black;
     }

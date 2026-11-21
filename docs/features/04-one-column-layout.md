@@ -16,10 +16,12 @@ A second preview layout: a single column in plain document order. Applicant trac
 4. **Work Experience**: per job, the company in bold; a meta line `position · location · work type · date range`; description; key achievements as bullets; a `Technologies: Category: tech · Category: tech` line.
 5. **Projects**: name in bold; date range; link; description; key achievements as bullets.
 6. **Main skills**: the first skill section (Technical Skills by default, under whatever title the user gave it), one line per list or group, `Label: values`, label semibold.
-7. **Education**: `School - Degree` in bold, date range below.
-8. **Certifications**: bulleted list.
-9. **Languages**: values joined with ` · `.
-10. **Other skill sections**: same format. Grouped skills get one section per skill section, under its own title; simple skills share one section titled with the section names joined by " / ", each line prefixed with its section name.
+7. **Other skill sections**, right after: same format. Grouped skills get one section per skill section, under its own title; simple skills share one section titled with the section names joined by " / ", each line prefixed with its section name.
+8. **Education**: `School - Degree` in bold, date range below.
+9. **Certifications**: bulleted list.
+10. **Languages**: values joined with ` · `.
+
+This is the order of the editor's sections, so the preview reads in the same order as the form.
 
 ## Rules
 

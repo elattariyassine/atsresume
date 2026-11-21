@@ -563,9 +563,12 @@ const OneColumn = ({ resumeData }) => {
       {projects.some(projectItemHasContent) && (
         <Projects items={projects} tr={tr} />
       )}
+      {/* Same order as the editor: all skill sections together, then
+          education, certifications and languages. */}
       {technicalSkills && (
         <TechnicalSkills section={technicalSkills} grouped={grouped} tr={tr} />
       )}
+      <SecondarySkills sections={secondarySkills} grouped={grouped} tr={tr} />
       {education.length > 0 && (
         <Education items={education} tr={tr} />
       )}
@@ -573,7 +576,6 @@ const OneColumn = ({ resumeData }) => {
         <Certifications certifications={certifications} tr={tr} />
       )}
       {languages.length > 0 && <Languages languages={languages} tr={tr} />}
-      <SecondarySkills sections={secondarySkills} grouped={grouped} tr={tr} />
     </>
   );
 };
