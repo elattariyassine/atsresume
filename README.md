@@ -2,6 +2,19 @@
 
 A cutting-edge resume builder that helps job seekers create a professional, ATS-friendly resume in minutes. Our platform uses the latest technology to analyze and optimize your resume for maximum visibility and success with applicant tracking systems. Say goodbye to frustration and wasted time spent on manual resume formatting. Create your winning resume with ATSResume today and get noticed by employers.
 
+## About this fork
+
+This fork of [sauravhathi/atsresume](https://github.com/sauravhathi/atsresume) adds:
+
+- **One-column ATS layout** alongside the original two columns, for more reliable parsing by applicant tracking systems
+- **English and French resumes**: section titles, labels and dates follow the resume's language, which is saved with the resume
+- **Grouped skills**, e.g. *Frontend: React, Vue.js*, as an alternative to flat lists
+- **Work type, location and technologies** on each work experience
+- **Refresh from file**: re-read a loaded JSON resume after editing it in another editor; older resume files load with sensible defaults
+- Drag and drop working again on React 19, and no watermark on printed PDFs
+
+Each feature is described in [docs/features](docs/features/README.md).
+
 > ## 🚀 Supercharge Your ATS Resume with AI
 > Love this template but don't want to write it manually? I've partnered with **[CVInsight](https://www.cvinsight.me/)** to give you the ultimate AI-powered career toolkit:
 > 

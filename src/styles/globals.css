@@ -3,9 +3,14 @@
 @tailwind utilities;
 
 @layer base {
-    
+
+    /* The preview is a sheet of paper: keep it light even in dark mode. */
+    :root {
+        color-scheme: light;
+    }
+
     body {
-        @apply font-[sans-serif];
+        @apply font-[sans-serif] bg-white text-black;
     }
 
     ::-webkit-scrollbar {
@@ -322,16 +327,5 @@
     .cv-one-column-section-title {
         break-after: avoid;
         page-break-after: avoid;
-    }
-
-    .preview::after {
-        content: "Created using https://atsresume.vercel.app/";
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        opacity: 0.2;
-        font-size: small;
-        text-align: center;
-        z-index: -1;
     }
 }
