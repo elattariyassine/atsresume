@@ -119,6 +119,188 @@
     font-weight: 600 !important;
 }
 
+/* One-column mode: compact, source-ordered document flow. */
+.cv-one-column-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    column-gap: 1rem;
+}
+
+.cv-one-column-header-info {
+    min-width: 0;
+}
+
+.cv-one-column-name {
+    margin: 0;
+    font-size: 1.45rem;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: 0.01em;
+}
+
+.cv-one-column-position {
+    margin: 0.15rem 0 0.35rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.cv-one-column-contact,
+.cv-one-column-social {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.1rem 0.35rem;
+    line-height: 1.25;
+}
+
+.cv-one-column-contact {
+    font-size: 0.8rem;
+}
+
+.cv-one-column-social {
+    margin-top: 0.15rem;
+    font-size: 0.75rem;
+}
+
+.cv-one-column-contact a,
+.cv-one-column-social a {
+    overflow-wrap: anywhere;
+}
+
+.cv-one-column-separator {
+    color: #6b7280;
+}
+
+.cv-one-column-photo {
+    width: 5rem;
+    height: 5rem;
+    overflow: hidden;
+    border: 2px solid #a21caf;
+    border-radius: 9999px;
+}
+
+.cv-one-column-photo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cv-one-column-divider {
+    margin: 0.55rem 0 0.1rem;
+    border-style: dashed;
+}
+
+.cv-one-column-section {
+    margin-top: 0.65rem;
+}
+
+.cv-one-column-section-title {
+    margin: 0 0 0.3rem;
+    padding-bottom: 0.15rem;
+    border-bottom: 1px solid #d1d5db;
+    color: #86198f;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.cv-one-column-summary-text,
+.cv-one-column-job-description {
+    margin: 0;
+    line-height: 1.35;
+}
+
+.cv-one-column-job {
+    padding: 0.15rem 0 0.55rem;
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.cv-one-column-job + .cv-one-column-job {
+    padding-top: 0.5rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.cv-one-column-job-company {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.cv-one-column-job-meta {
+    margin: 0.1rem 0 0.25rem;
+    color: #4b5563;
+    font-size: 0.78rem;
+    line-height: 1.25;
+}
+
+.cv-one-column-bullets {
+    margin: 0.25rem 0 0.25rem;
+    padding-inline-start: 1rem;
+    font-size: 0.8rem;
+    line-height: 1.3;
+    list-style-type: disc;
+}
+
+.cv-one-column-bullets li + li {
+    margin-top: 0.1rem;
+}
+
+.cv-one-column-technologies {
+    margin: 0.25rem 0 0;
+    line-height: 1.3;
+}
+
+.cv-one-column-project-link {
+    display: block;
+    margin: 0.1rem 0 0.2rem;
+    overflow-wrap: anywhere;
+}
+
+.cv-one-column-skill-lines {
+    margin: 0;
+}
+
+.cv-one-column-skill-line {
+    margin: 0;
+    line-height: 1.35;
+}
+
+.cv-one-column-skill-line + .cv-one-column-skill-line {
+    margin-top: 0.1rem;
+}
+
+.cv-one-column-education-item + .cv-one-column-education-item {
+    margin-top: 0.35rem;
+}
+
+.cv-one-column-education-item p {
+    margin: 0;
+    line-height: 1.3;
+}
+
+.cv-one-column-certification-list {
+    margin: 0;
+    padding: 0;
+    padding-inline-start: 1rem;
+    list-style-type: disc;
+    line-height: 1.35;
+}
+
+.cv-one-column-certification-list li + li {
+    margin-top: 0.1rem;
+}
+
+.cv-one-column-dragging {
+    outline: 1px dashed #9ca3af;
+    background: white;
+}
+
 @media print {
     .exclude-print {
         display: none;
@@ -135,6 +317,11 @@
 
     .preview {
         overflow-y: visible !important;
+    }
+
+    .cv-one-column-section-title {
+        break-after: avoid;
+        page-break-after: avoid;
     }
 
     .preview::after {

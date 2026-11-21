@@ -37,5 +37,7 @@ Every loaded file is normalized before use. Missing fields are filled with defau
 | `workExperience[].technologies` | `[]` |
 | `locale` (see [05](05-resume-language.md)) | `"en"` |
 | `layout` (see [04](04-one-column-layout.md)) | `"two-column"` |
+| `projects[].name` | taken from `projects[].title` if present (upstream bug), else `""` |
+| missing text fields / lists | `""` / `[]` |
 
 The same normalization applies to the built-in default resume, and is implemented once and shared.

@@ -24,6 +24,10 @@ The App Router runs on React 19, which drops `defaultProps` for function compone
 
 Upstream bumped `next` to 15.5.9 (security fix) in `package.json` but not in `yarn.lock`, which still resolved 15.5.2. The lockfile is regenerated.
 
+## New projects have no name field
+
+Upstream's `addProject` creates `{ title: "" }`, but the form and preview use `name`, so React warns about an uncontrolled input and the project name is stored under the wrong key. New projects now use `name`, and loading a file maps a stray `title` to `name`.
+
 ## Debug logging
 
 Leftover `console.log` calls are removed.

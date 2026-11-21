@@ -29,6 +29,12 @@ export const normalizeResumeData = (data) => {
     technologies: Array.isArray(work.technologies) ? work.technologies : [],
   }));
 
+  // Upstream's "add project" briefly stored the name as `title`.
+  resume.projects = resume.projects.map(({title, ...project}) => ({
+    ...project,
+    name: typeof project.name === "string" ? project.name : (title ?? ""),
+  }));
+
   if (!Array.isArray(resume.groupedSkills)) resume.groupedSkills = defaults.groupedSkills;
   resume.useGroupedSkills = resume.useGroupedSkills === true;
 

@@ -10,6 +10,8 @@ import LeftSide from "../components/LeftSide";
 import RightSide from "../components/RightSide";
 import A4PageWrapper from "../components/A4PageWrapper";
 import {onDragEndHandler} from "../utils/onDrugEndHandler";
+import LayoutToggle from "../components/LayoutToggle";
+import OneColumn from "../components/oneColumn/OneColumn";
 
 const DragDropContext = dynamic(
   () =>
@@ -34,17 +36,24 @@ const Preview = () => {
 
   return (
     <div className="md:max-w-[60%] sticky top-0 preview rm-padding-print p-6 md:overflow-y-scroll md:h-screen">
+      <LayoutToggle/>
       <A4PageWrapper>
         <ModalHighlightMenu/>
         <DragDropContext
           onDragEnd={(result) => onDragEndHandler(result, resumeData, setResumeData)}
         >
-          <Header resumeData={resumeData} icons={icons}/>
-          <hr className="border-dashed my-2"/>
-          <div className="grid grid-cols-3 gap-6">
-            <LeftSide resumeData={resumeData}/>
-            <RightSide resumeData={resumeData}/>
-          </div>
+          {resumeData.layout === "one-column" ? (
+            <OneColumn resumeData={resumeData}/>
+          ) : (
+            <>
+              <Header resumeData={resumeData} icons={icons}/>
+              <hr className="border-dashed my-2"/>
+              <div className="grid grid-cols-3 gap-6">
+                <LeftSide resumeData={resumeData}/>
+                <RightSide resumeData={resumeData}/>
+              </div>
+            </>
+          )}
         </DragDropContext>
       </A4PageWrapper>
     </div>
