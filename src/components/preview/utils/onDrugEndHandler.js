@@ -35,6 +35,13 @@ export const onDragEndHandler = (result, resumeData, setResumeData) => {
         setResumeData({ ...resumeData, skills: newSkills });
     }
 
+    if (source.droppableId === "grouped-skills") {
+        const newGroupedSkills = [...resumeData.groupedSkills];
+        const [removed] = newGroupedSkills.splice(source.index, 1);
+        newGroupedSkills.splice(destination.index, 0, removed);
+        setResumeData({ ...resumeData, groupedSkills: newGroupedSkills });
+    }
+
     if (source.droppableId.includes("projects")) {
         const newProjects = [...resumeData.projects];
         const [removed] = newProjects.splice(source.index, 1);

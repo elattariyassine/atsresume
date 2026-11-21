@@ -94,6 +94,30 @@ const DefaultResumeData = {
       ] 
     }
   ],
+  useGroupedSkills: false,
+  groupedSkills: [
+    {
+      title: "Technical Skills",
+      groups: [
+        { groupName: "Languages & Scripting", skills: "JavaScript, TypeScript, Python, PHP, Java" },
+        { groupName: "Frontend Technologies", skills: "React, Vue.js, HTML5, CSS3, Bootstrap" },
+        { groupName: "Backend & Databases", skills: "Node.js, Express, MongoDB, PostgreSQL, MySQL" }
+      ]
+    },
+    {
+      title: "Soft Skills",
+      groups: [
+        { groupName: "Communication", skills: "Collaboration, Problem-solving, Communication, Time management" },
+        { groupName: "Leadership", skills: "Team management, Project coordination, Mentoring" }
+      ]
+    },
+    {
+      title: "Additional Skills",
+      groups: [
+        { groupName: "Professional", skills: "Public Speaking, Writing, Research" }
+      ]
+    }
+  ],
   languages: [
     "English",
     "Hindi",

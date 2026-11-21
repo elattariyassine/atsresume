@@ -29,11 +29,11 @@ Lets the user present skills either as the original flat lists or as named group
 
 - A **Skills Format** control above the skills with two radio options: *Simple Skills* / *Grouped Skills*.
 - Simple: upstream's skills form, unchanged.
-- Grouped: for each section, its title, then one row per group with *Group name* and *Skills in group* inputs side by side, plus add/remove buttons.
+- Grouped: for each section, its title, then one row per group with *Group name* and *Skills* inputs side by side and a delete button for that row, plus an add button under the rows.
 
 ## Preview (two-column layout)
 
 - Grouped mode replaces the flat skill sections in the left column.
 - Each section: title, then for each group the group name (semibold, underlined, followed by a colon) on one line and its skills underneath.
-- Sections without any groups are hidden.
+- Groups with both fields empty, and sections without any visible group, are hidden.
 - Sections can be reordered by drag and drop, like the flat skills.
