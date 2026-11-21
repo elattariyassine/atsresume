@@ -8,7 +8,7 @@ const DefaultResumeData = {
   socialMedia: [
     {
       socialMedia: "Github",
-      link: "github.com//bedivere-lea",
+      link: "github.com/bedivere-lea",
     },
     {
       socialMedia: "LinkedIn",

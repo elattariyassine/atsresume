@@ -1,145 +1,48 @@
 # ATSResume
 
-A cutting-edge resume builder that helps job seekers create a professional, ATS-friendly resume in minutes. Our platform uses the latest technology to analyze and optimize your resume for maximum visibility and success with applicant tracking systems. Say goodbye to frustration and wasted time spent on manual resume formatting. Create your winning resume with ATSResume today and get noticed by employers.
+A resume builder that produces clean, ATS-friendly PDFs. Edit on the left, see the page update on the right, and print.
 
-## About this fork
+![The editor next to the live resume preview](docs/screenshots/editor.png)
 
-This fork of [sauravhathi/atsresume](https://github.com/sauravhathi/atsresume) adds:
+## Two layouts
 
-- **One-column ATS layout** alongside the original two columns, for more reliable parsing by applicant tracking systems
-- **English and French resumes**: section titles, labels and dates follow the resume's language, which is saved with the resume
-- **Grouped skills**, e.g. *Frontend: React, Vue.js*, as an alternative to flat lists
-- **Work type, location and technologies** on each work experience
-- **Refresh from file**: re-read a loaded JSON resume after editing it in another editor; older resume files load with sensible defaults
-- **A redesigned editor**: one toolbar for open/save/reload with unsaved-changes status, a settings card for language, layout and skills format, collapsible sections and reorderable cards
-- Drag and drop working again on React 19, and clean PDFs: no watermark and no browser URL/date header
+<table>
+  <tr>
+    <th>Two columns</th>
+    <th>One column (best for ATS)</th>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/two-column.png" alt="Resume in the two-column layout"></td>
+    <td><img src="docs/screenshots/one-column.png" alt="Resume in the one-column layout"></td>
+  </tr>
+</table>
+
+Applicant tracking systems read single-column resumes most reliably. Switch layouts at any time; the content stays the same.
+
+## Features
+
+- **English and French resumes**: section titles, labels and dates follow the resume's language.
+- **Your resume is a JSON file**: open it, edit it in the app or in your editor, and reload it in one click.
+- **Grouped skills** (e.g. *Frontend: React, Vue.js*) or simple lists.
+- **Work type, location and technologies** for each job.
+- **Clean PDFs**: A4, no browser header or footer, saved as `Your Name - CV.pdf`.
+- **Drag and drop** in the preview to reorder jobs, projects and bullet points.
+
+## Run it
+
+```bash
+yarn install
+yarn dev
+```
+
+Open <http://localhost:3000>. Or with Docker: `docker compose up --build`.
+
+To get a PDF, click **Download PDF** and choose *Save as PDF*.
+
+## Docs
 
 Each feature is described in [docs/features](docs/features/README.md).
 
-> ## 🚀 Supercharge Your ATS Resume with AI
-> Love this template but don't want to write it manually? I've partnered with **[CVInsight](https://www.cvinsight.me/)** to give you the ultimate AI-powered career toolkit:
-> 
-> * 📄 **[AI Resume Studio](https://www.cvinsight.me/resume-preview):** Generate beautiful, ATS-optimized PDFs instantly without fighting with margins.
-> * 🎯 **[1-Click Job Tailoring](https://www.cvinsight.me/job-tailored-resume):** Paste a Job Description and let AI automatically rewrite your resume to perfectly match it.
-> * 🔥 **[AI Resume Roaster](https://www.cvinsight.me/resume-roast):** Get brutally honest, recruiter-level feedback on exactly why you are getting rejected.
-> 
-> 👉 **[Explore all CVInsight features](https://www.cvinsight.me/)** and use code **SAURAV15** at checkout for **15% off**
+## Credits
 
-## Demo
-
-#### [https://atsresume.vercel.app/](https://atsresume.vercel.app/)
-![image](https://user-images.githubusercontent.com/61316762/218017511-fbbaa7da-6154-449f-9e46-8de45b0e6c29.png)
-
-### Resume Score
-#### https://www.resumego.net/resume-checker/
-![image](https://user-images.githubusercontent.com/61316762/218143206-f0e5e764-52bc-4c25-84f2-6b2fff00cd4b.png)
-
-## Change Log
-
-- Drag and drop sections to reorder them in the resume(Work Experience, Projects, Skills)
-
-## Sections
-
-- [Personal Information](#personal-information)
-- [Social Media](#social-media)
-- [Summary](#summary)
-- [Educations](#education)
-- [Work Experience](#work-experience)
-- [Projects](#projects)
-- [Technical Skills](#technical-skills)
-- [Soft Skills](#soft-skills)
-- [Languages](#languages)
-- [Additional Skills](#additional-skills)
-- [Certifications](#certifications)
-
-## Personal Information
-
-- Name
-- Email
-- Phone
-- Address
-- Profile Picture
-
-## Social Media
-
-- Social Media Links
-
-## Summary
-
-- Summary
-
-## Educations
-
-- Degree
-- Institute
-- Start Date
-- End Date
-
-## Work Experience
-
-- Company
-- Designation
-- Description
-- Key Achievements
-- Start Date
-- End Date
-
-Description optional
-
-## Projects
-
-- Project Name
-- Description
-- key Achievements
-- Start Date
-- End Date
-
-Description optional
-
-## Technical Skills
-
-- Technical Skills
-
-## Soft Skills
-
-- Soft Skills
-
-## Languages
-
-- Languages
-
-## Additional Skills
-
-- Additional Skills
-
-## Certifications
-
-- Certifications
-
-## How to Add Key Achievements
-
-Key achievements are the most important part of your resume. 
-
-- Add key achievements to your resume to make it more attractive and increase your chances of getting noticed by employers.
-- Add key achievements to your work experience and projects.
-- Add key achievements to your resume by clicking on the new line.
-
-## PageSpeed Insights
-
-![image](https://user-images.githubusercontent.com/61316762/218244257-e85172dc-46bd-4f4b-b9c2-9bd17c693cc8.png)
-
-![image](https://user-images.githubusercontent.com/61316762/218244267-c46f5d02-b742-4b4c-ba7e-ae1bfb1e04d4.png)
-
-## License
-
-[MIT](https://github.com/sauravhathi/atsresume/blob/main/LICENSE.md)
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
-## Authors and acknowledgment
-
-- [Saurav Hathi](https://github.com/sauravhathi)
+Built on [ATSResume](https://github.com/sauravhathi/atsresume) by [Saurav Hathi](https://github.com/sauravhathi). [MIT License](LICENSE.md).
