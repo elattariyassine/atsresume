@@ -1,17 +1,19 @@
 import React, {useContext} from "react";
 import {ResumeContext} from "../../builder";
+import {useTranslation} from "../../../i18n/useTranslation";
 
 const PersonalInformation = ({}) => {
+  const {t} = useTranslation();
   const {resumeData, setResumeData, handleProfilePicture, handleChange} =
     useContext(ResumeContext);
 
   return (
     <div className="flex-col-gap-2">
-      <h2 className="input-title">Personal Information</h2>
+      <h2 className="input-title">{t('personalInformation')}</h2>
       <div className="grid-4">
         <input
           type="text"
-          placeholder="Full Name"
+          placeholder={t('fullName')}
           name="name"
           className="pi"
           value={resumeData.name}
@@ -19,7 +21,7 @@ const PersonalInformation = ({}) => {
         />
         <input
           type="text"
-          placeholder="Job Title"
+          placeholder={t('jobTitle')}
           name="position"
           className="pi"
           value={resumeData.position}
@@ -27,7 +29,7 @@ const PersonalInformation = ({}) => {
         />
         <input
           type="text"
-          placeholder="Contact Information"
+          placeholder={t('contactInformation')}
           name="contactInformation"
           className="pi"
           value={resumeData.contactInformation}
@@ -37,7 +39,7 @@ const PersonalInformation = ({}) => {
         />
         <input
           type="email"
-          placeholder="Email"
+          placeholder={t('email')}
           name="email"
           className="pi"
           value={resumeData.email}
@@ -45,7 +47,7 @@ const PersonalInformation = ({}) => {
         />
         <input
           type="text"
-          placeholder="Address"
+          placeholder={t('address')}
           name="address"
           className="pi"
           value={resumeData.address}
@@ -57,7 +59,7 @@ const PersonalInformation = ({}) => {
           accept="image/*"
           className="profileInput"
           onChange={handleProfilePicture}
-          placeholder="Profile Picture"
+          placeholder={t('profilePicture')}
         />
       </div>
     </div>

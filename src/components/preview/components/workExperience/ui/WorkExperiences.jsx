@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import dynamic from "next/dynamic";
 import {ResumeContext} from "../../../../builder";
 import WorkExperience from "../components/WorkExperience";
+import {useTranslation} from "../../../../../i18n/useTranslation";
 
 const Droppable = dynamic(
   () => import("@hello-pangea/dnd").then((mod) => mod.Droppable),
@@ -9,6 +10,7 @@ const Droppable = dynamic(
 );
 
 const WorkExperiences = () => {
+  const {t} = useTranslation();
   const {resumeData} = useContext(ResumeContext);
 
   return (
@@ -20,7 +22,7 @@ const WorkExperiences = () => {
             contentEditable
             suppressContentEditableWarning
           >
-            Work Experience
+            {t('workExperience')}
           </h2>
           {resumeData.workExperience.map((item, index) => (
             <WorkExperience

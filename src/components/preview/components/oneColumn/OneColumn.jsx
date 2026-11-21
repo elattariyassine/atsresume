@@ -1,6 +1,7 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { useTranslation } from "../../../../i18n/useTranslation";
 
 const Droppable = dynamic(
   () =>
@@ -17,22 +18,6 @@ const Draggable = dynamic(
   { ssr: false }
 );
 
-// English labels; replaced by translations in the resume-language iteration.
-const LABELS = {
-  summary: "Summary",
-  workExperience: "Work Experience",
-  projects: "Projects",
-  education: "Education",
-  certifications: "Certifications",
-  languages: "Languages",
-  technologies: "Technologies",
-  technicalSkills: "Technical Skills",
-  softSkills: "Soft Skills",
-  additionalSkills: "Additional Skills",
-  present: "Present",
-};
-const useLabels = () => ({ t: (key) => LABELS[key] ?? key, locale: "en" });
-const workTypeLabel = (workType) => workType;
 
 const hasValue = (value) =>
   typeof value === "string"
@@ -62,22 +47,6 @@ const projectItemHasContent = (item) =>
 
 const externalHref = (link) =>
   /^https?:\/\//i.test(link) ? link : `http://${link}`;
-
-const formatDateRange = (startYear, endYear, locale, t) => {
-  if (!startYear) return "";
-
-  const start = new Date(startYear);
-  if (Number.isNaN(start.getTime())) return "";
-
-  const end = new Date(endYear);
-  const dateLocale = locale === "fr" ? "fr-FR" : "en-US";
-  const formatMonthYear = (date) =>
-    date.toLocaleString(dateLocale, { month: "short", year: "numeric" });
-
-  return `${formatMonthYear(start)} - ${
-    Number.isNaN(end.getTime()) ? t("present") : formatMonthYear(end)
-  }`;
-};
 
 const InlineText = ({ items, dateRange, className }) => {
   const values = items.filter(hasValue);
@@ -202,8 +171,8 @@ const OneColumnSection = ({ title, children, className = "" }) => (
   </section>
 );
 
-const WorkExperience = ({ items, locale, t }) => (
-  <OneColumnSection title={t("workExperience")} className="cv-one-column-work">
+const WorkExperience = ({ items, tr }) => (
+  <OneColumnSection title={tr.t("workExperience")} className="cv-one-column-work">
     <Droppable droppableId="work-experience" type="WORK_EXPERIENCE">
       {(provided) => (
         <div {...provided.droppableProps} ref={provided.innerRef}>
@@ -212,15 +181,10 @@ const WorkExperience = ({ items, locale, t }) => (
               item.position,
               item.location,
               item.workType && item.workType !== "None"
-                ? workTypeLabel(item.workType)
+                ? tr.workTypeLabel(item.workType)
                 : null,
             ];
-            const dateRange = formatDateRange(
-              item.startYear,
-              item.endYear,
-              locale,
-              t
-            );
+            const dateRange = tr.formatDateRange(item.startYear, item.endYear);
             const achievements =
               typeof item.keyAchievements === "string"
                 ? item.keyAchievements.split("\n").filter(hasValue)
@@ -312,7 +276,7 @@ const WorkExperience = ({ items, locale, t }) => (
                     )}
                     {technologies.length > 0 && (
                       <p className="cv-one-column-technologies content">
-                        <span className="i-semi-bold">{t("technologies")}:</span>{" "}
+                        <span className="i-semi-bold">{tr.t("technologies")}:</span>{" "}
                         {technologies.join(" · ")}
                       </p>
                     )}
@@ -328,18 +292,13 @@ const WorkExperience = ({ items, locale, t }) => (
   </OneColumnSection>
 );
 
-const Projects = ({ items, locale, t }) => (
-  <OneColumnSection title={t("projects")} className="cv-one-column-projects">
+const Projects = ({ items, tr }) => (
+  <OneColumnSection title={tr.t("projects")} className="cv-one-column-projects">
     <Droppable droppableId="projects" type="PROJECTS">
       {(provided) => (
         <div {...provided.droppableProps} ref={provided.innerRef}>
           {items.map((item, index) => {
-            const dateRange = formatDateRange(
-              item.startYear,
-              item.endYear,
-              locale,
-              t
-            );
+            const dateRange = tr.formatDateRange(item.startYear, item.endYear);
             const achievements =
               typeof item.keyAchievements === "string"
                 ? item.keyAchievements.split("\n").filter(hasValue)
@@ -457,17 +416,7 @@ const getSkillSections = (resumeData) => {
   return sections.filter(skillSectionHasContent);
 };
 
-const skillTitle = (title, t) => {
-  const titleMap = {
-    "Technical Skills": "technicalSkills",
-    "Soft Skills": "softSkills",
-    "Additional Skills": "additionalSkills",
-  };
-
-  return titleMap[title] ? t(titleMap[title]) : title;
-};
-
-const SkillLines = ({ sections, grouped, t }) => {
+const SkillLines = ({ sections, grouped, tr }) => {
   const lines = [];
 
   sections.forEach((section) => {
@@ -482,7 +431,7 @@ const SkillLines = ({ sections, grouped, t }) => {
     }
 
     const skills = (section.skills || []).filter(hasValue).join(", ");
-    if (skills) lines.push(`${skillTitle(section.title, t)}: ${skills}`);
+    if (skills) lines.push(`${tr.skillTitle(section.title)}: ${skills}`);
   });
 
   return (
@@ -503,40 +452,35 @@ const SkillLines = ({ sections, grouped, t }) => {
   );
 };
 
-const TechnicalSkills = ({ section, grouped, t }) => (
+const TechnicalSkills = ({ section, grouped, tr }) => (
   <OneColumnSection
-    title={skillTitle(section.title, t)}
+    title={tr.skillTitle(section.title)}
     className="cv-one-column-technical-skills"
   >
-    <SkillLines sections={[section]} grouped={grouped} t={t} />
+    <SkillLines sections={[section]} grouped={grouped} tr={tr} />
   </OneColumnSection>
 );
 
-const SecondarySkills = ({ sections, grouped, t }) => {
+const SecondarySkills = ({ sections, grouped, tr }) => {
   if (sections.length === 0) return null;
 
   const title =
     sections.length > 1
-      ? `${t("softSkills")} / ${t("additionalSkills")}`
-      : skillTitle(sections[0].title, t);
+      ? `${tr.t("softSkills")} / ${tr.t("additionalSkills")}`
+      : tr.skillTitle(sections[0].title);
 
   return (
     <OneColumnSection title={title} className="cv-one-column-secondary-skills">
-      <SkillLines sections={sections} grouped={grouped} t={t} />
+      <SkillLines sections={sections} grouped={grouped} tr={tr} />
     </OneColumnSection>
   );
 };
 
-const Education = ({ items, locale, t }) => (
-  <OneColumnSection title={t("education")} className="cv-one-column-education">
+const Education = ({ items, tr }) => (
+  <OneColumnSection title={tr.t("education")} className="cv-one-column-education">
     {items.map((item, index) => {
       const title = [item.school, item.degree].filter(hasValue).join(" - ");
-      const dateRange = formatDateRange(
-        item.startYear,
-        item.endYear,
-        locale,
-        t
-      );
+      const dateRange = tr.formatDateRange(item.startYear, item.endYear);
 
       return (
         <article className="cv-one-column-education-item" key={index}>
@@ -552,8 +496,8 @@ const Education = ({ items, locale, t }) => (
   </OneColumnSection>
 );
 
-const Certifications = ({ certifications, t }) => (
-  <OneColumnSection title={t("certifications")} className="cv-one-column-certifications">
+const Certifications = ({ certifications, tr }) => (
+  <OneColumnSection title={tr.t("certifications")} className="cv-one-column-certifications">
     <ul className="cv-one-column-certification-list sub-content">
       {certifications.map((certification, index) => (
         <li key={index}>
@@ -568,14 +512,14 @@ const Certifications = ({ certifications, t }) => (
   </OneColumnSection>
 );
 
-const Languages = ({ languages, t }) => (
-  <OneColumnSection title={t("languages")} className="cv-one-column-languages">
+const Languages = ({ languages, tr }) => (
+  <OneColumnSection title={tr.t("languages")} className="cv-one-column-languages">
     <p className="sub-content">{languages.join(" · ")}</p>
   </OneColumnSection>
 );
 
 const OneColumn = ({ resumeData }) => {
-  const { t, locale } = useLabels();
+  const tr = useTranslation();
   const grouped = Boolean(resumeData.useGroupedSkills);
   const skills = getSkillSections(resumeData);
   const technicalIndex = skills.findIndex(
@@ -602,31 +546,27 @@ const OneColumn = ({ resumeData }) => {
       <OneColumnHeader resumeData={resumeData} />
       <hr className="cv-one-column-divider" />
       {hasValue(resumeData.summary) && (
-        <OneColumnSection title={t("summary")} className="cv-one-column-summary">
+        <OneColumnSection title={tr.t("summary")} className="cv-one-column-summary">
           <p className="cv-one-column-summary-text content">{resumeData.summary}</p>
         </OneColumnSection>
       )}
       {workExperience.some(workItemHasContent) && (
-        <WorkExperience
-          items={workExperience}
-          locale={locale}
-          t={t}
-        />
+        <WorkExperience items={workExperience} tr={tr} />
       )}
       {projects.some(projectItemHasContent) && (
-        <Projects items={projects} locale={locale} t={t} />
+        <Projects items={projects} tr={tr} />
       )}
       {technicalSkills && (
-        <TechnicalSkills section={technicalSkills} grouped={grouped} t={t} />
+        <TechnicalSkills section={technicalSkills} grouped={grouped} tr={tr} />
       )}
       {education.length > 0 && (
-        <Education items={education} locale={locale} t={t} />
+        <Education items={education} tr={tr} />
       )}
       {certifications.length > 0 && (
-        <Certifications certifications={certifications} t={t} />
+        <Certifications certifications={certifications} tr={tr} />
       )}
-      {languages.length > 0 && <Languages languages={languages} t={t} />}
-      <SecondarySkills sections={secondarySkills} grouped={grouped} t={t} />
+      {languages.length > 0 && <Languages languages={languages} tr={tr} />}
+      <SecondarySkills sections={secondarySkills} grouped={grouped} tr={tr} />
     </>
   );
 };

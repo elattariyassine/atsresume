@@ -4,6 +4,7 @@ import DateRange from "../../utility/DateRange";
 import Language from "../components/Language";
 import Certification from "../components/Certification";
 import dynamic from "next/dynamic";
+import {useTranslation} from "../../../i18n/useTranslation";
 
 const Droppable = dynamic(
   () => import("@hello-pangea/dnd").then((mod) => mod.Droppable),
@@ -15,12 +16,13 @@ const Draggable = dynamic(
 );
 
 const LeftSide = ({ resumeData }) => {
+  const {t} = useTranslation();
   return (
     <div className="col-span-1 space-y-2">
       {resumeData.summary.length > 0 && (
         <div className="mb-1">
           <h2 className="section-title mb-1 border-b-2 border-gray-300">
-            Summary
+            {t('summary')}
           </h2>
           <p className="content break-words">{resumeData.summary}</p>
         </div>
@@ -29,7 +31,7 @@ const LeftSide = ({ resumeData }) => {
       {resumeData.education.length > 0 && (
         <div className="mb-1">
           <h2 className="section-title mb-1 border-b-2 border-gray-300">
-            Education
+            {t('education')}
           </h2>
           {resumeData.education.map((item, index) => (
             <div key={index} className="mb-1">
@@ -105,9 +107,9 @@ const LeftSide = ({ resumeData }) => {
         </Droppable>
       )}
 
-      <Language title="Languages" languages={resumeData.languages} />
+      <Language title={t('languages')} languages={resumeData.languages} />
       <Certification
-        title="Certifications"
+        title={t('certifications')}
         certifications={resumeData.certifications}
       />
     </div>

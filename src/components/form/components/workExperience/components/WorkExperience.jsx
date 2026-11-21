@@ -4,15 +4,12 @@ import {ResumeContext} from "../../../../builder";
 import {BsTrash3} from "react-icons/bs";
 import {removeWorkExperience} from "../units/removeResumeExperience";
 import Technologies from "./Technologies";
+import {useTranslation} from "../../../../../i18n/useTranslation";
 
-const WORK_TYPES = [
-  {value: "None", label: "Work type: not shown"},
-  {value: "Remote", label: "Remote"},
-  {value: "In-Office", label: "In-Office"},
-  {value: "Hybrid", label: "Hybrid"},
-];
+const WORK_TYPES = ["None", "Remote", "In-Office", "Hybrid"];
 
 const WorkExperience = ({workExperience, index}) => {
+  const {t, workTypeLabel} = useTranslation();
   const {resumeData, setResumeData,} = useContext(ResumeContext);
 
   return (
@@ -24,7 +21,7 @@ const WorkExperience = ({workExperience, index}) => {
       >
         <input
           type="text"
-          placeholder="Company"
+          placeholder={t('company')}
           name="company"
           className="w-full other-input"
           value={workExperience.company}
@@ -34,7 +31,7 @@ const WorkExperience = ({workExperience, index}) => {
         />
         <input
           type="text"
-          placeholder="Job Title"
+          placeholder={t('jobTitle')}
           name="position"
           className="w-full other-input"
           value={workExperience.position}
@@ -45,20 +42,20 @@ const WorkExperience = ({workExperience, index}) => {
         <div className="flex gap-2">
           <select
             name="workType"
-            aria-label="Work type"
+            aria-label={t('workType')}
             className="flex-1 min-w-0 other-input"
             value={workExperience.workType || "None"}
             onChange={(e) =>
               handleWorkExperience(resumeData, setResumeData, e, index)
             }
           >
-            {WORK_TYPES.map(({value, label}) => (
-              <option key={value} value={value}>{label}</option>
+            {WORK_TYPES.map((value) => (
+              <option key={value} value={value}>{workTypeLabel(value)}</option>
             ))}
           </select>
           <input
             type="text"
-            placeholder="Location"
+            placeholder={t('location')}
             name="location"
             className="flex-1 min-w-0 other-input"
             value={workExperience.location || ""}
@@ -69,7 +66,7 @@ const WorkExperience = ({workExperience, index}) => {
         </div>
         <textarea
           type="text"
-          placeholder="Description"
+          placeholder={t('description')}
           name="description"
           className="w-full other-input h-32"
           value={workExperience.description}
@@ -80,7 +77,7 @@ const WorkExperience = ({workExperience, index}) => {
         />
         <textarea
           type="text"
-          placeholder="Key Achievements"
+          placeholder={t('keyAchievements')}
           name="keyAchievements"
           className="w-full other-input h-40"
           value={workExperience.keyAchievements}
@@ -94,7 +91,7 @@ const WorkExperience = ({workExperience, index}) => {
         >
           <input
             type="date"
-            placeholder="Start Year"
+            placeholder={t('startYear')}
             name="startYear"
             className="flex-1 m-0 other-input"
             value={workExperience.startYear}
@@ -104,7 +101,7 @@ const WorkExperience = ({workExperience, index}) => {
           />
           <input
             type="date"
-            placeholder="End Year"
+            placeholder={t('endYear')}
             name="endYear"
             className="flex-1 m-0 other-input"
             value={workExperience.endYear}
@@ -119,7 +116,7 @@ const WorkExperience = ({workExperience, index}) => {
         onClick={() => {
           removeWorkExperience(resumeData, setResumeData, index)
         }}
-        aria-label="Remove"
+        aria-label={t('remove')}
         className="p-2 h-fit text-white bg-fuchsia-700 rounded text-xl"
       >
         <BsTrash3/>

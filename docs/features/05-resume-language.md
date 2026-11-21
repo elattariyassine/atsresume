@@ -11,7 +11,8 @@ Used Next.js Pages Router i18n (`i18n` in `next.config.js`) and changed the URL 
 - The language is stored in the resume: `"locale": "en" | "fr"`. A saved file reopens in its language; files without it default to `"en"`.
 - No routing or URL changes. Switching is instant and client-side.
 - Translations live in `src/locales/en.json` and `src/locales/fr.json`, which must have the same keys.
-- A `useTranslation()` hook returns `{ t, locale, setLocale }`. `t(key)` falls back to English, then to the key itself, so a missing translation never shows a blank.
+- `src/i18n/useTranslation.js` exposes `useTranslation()`, which reads the locale from the resume and returns `{ t, locale, setLocale, skillTitle, workTypeLabel, formatDateRange }`. `t(key, params)` falls back to English, then to the key itself, so a missing translation never shows a blank; `{name}` placeholders are filled from `params`.
+- `createTranslator(locale)` returns the same helpers without React, for reuse and testing.
 - The page's `<html lang>` follows the resume language, so a printed or saved PDF carries the right language tag.
 
 ## Form
@@ -23,10 +24,12 @@ A **Resume Language** select near the top of the form: *English* / *Français*.
 - Form section titles, placeholders and button labels
 - Preview section titles in both layouts (Summary, Education, Work Experience, Projects, Languages, Certifications, skill section names, Technologies)
 - Work type names (Remote, In-Office, Hybrid)
-- Dates: month names use the locale (`en-US` / `fr-FR`), and an open end date reads "Present" / "Présent"
+- Dates: month names use the locale (`en-US` / `fr-FR`), capitalized (`Feb 2023`, `Févr. 2023`), and an open end date reads "Present" / "Présent"
 
 User-entered content is never translated.
 
 ## Skill section titles
 
 Skill sections are identified by their stored English titles (`Technical Skills`, `Soft Skills`, `Additional Skills`). These three are shown translated; any other (user-renamed) title is shown as typed.
+
+The two-column preview lets the user rename a skill section by editing its title in place. The rename is only saved when the text actually changed: merely clicking into a translated title and out again must not overwrite the stored English key with the French text.

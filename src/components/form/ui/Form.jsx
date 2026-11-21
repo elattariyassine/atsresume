@@ -1,5 +1,6 @@
 import React from 'react';
 import LoadUnload from "../components/LoadUnload";
+import ResumeLanguage from "../components/ResumeLanguage";
 import PersonalInformation from "../components/PersonalInformation";
 import SocialMedias from "../components/socialMedia/ui/SocialMedias";
 import Summary from "../components/Summary";
@@ -14,6 +15,7 @@ const Form = () => {
   return (
     <form className="p-4 bg-fuchsia-600 exclude-print md:max-w-[40%] md:h-screen md:overflow-y-scroll">
       <LoadUnload/>
+      <ResumeLanguage/>
       <PersonalInformation/>
       <SocialMedias/>
       <Summary/>

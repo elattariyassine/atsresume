@@ -3,30 +3,32 @@ import {ResumeContext} from "../../../../builder";
 import SkillsGroup from "../components/SkillsGroup";
 import SkillGroupsSection from "../components/SkillGroupsSection";
 import {setUseGroupedSkills} from "../utlis/groupedSkills";
+import {useTranslation} from "../../../../../i18n/useTranslation";
 
 const FORMATS = [
-  {value: false, label: "Simple Skills"},
-  {value: true, label: "Grouped Skills"},
+  {value: false, labelKey: "simpleSkills"},
+  {value: true, labelKey: "groupedSkills"},
 ];
 
 const Skills = () => {
+  const {t} = useTranslation();
   const {resumeData, setResumeData} = useContext(ResumeContext);
   const grouped = Boolean(resumeData.useGroupedSkills);
 
   return (
     <div>
       <div className="flex-col-gap-2 mb-2">
-        <h2 className="input-title">Skills Format</h2>
-        <div className="flex gap-4" role="radiogroup" aria-label="Skills format">
-          {FORMATS.map(({value, label}) => (
-            <label key={label} className="flex items-center gap-2 text-white cursor-pointer">
+        <h2 className="input-title">{t('skillsFormat')}</h2>
+        <div className="flex gap-4" role="radiogroup" aria-label={t('skillsFormat')}>
+          {FORMATS.map(({value, labelKey}) => (
+            <label key={labelKey} className="flex items-center gap-2 text-white cursor-pointer">
               <input
                 type="radio"
                 name="skillsFormat"
                 checked={grouped === value}
                 onChange={() => setUseGroupedSkills(resumeData, setResumeData, value)}
               />
-              {label}
+              {t(labelKey)}
             </label>
           ))}
         </div>

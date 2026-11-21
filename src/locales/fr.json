@@ -1,0 +1,71 @@
+{
+  "resumeLanguage": "Langue du CV",
+  "layout": "Mise en page",
+  "twoColumns": "2 colonnes",
+  "oneColumn": "1 colonne",
+
+  "loadData": "Charger",
+  "saveData": "Enregistrer",
+  "refreshData": "Actualiser",
+  "refreshFile": "Relire {file}",
+  "refreshDisabled": "Chargez d'abord un fichier",
+  "invalidFile": "Impossible de charger « {file} » : ce n'est pas un fichier JSON de CV valide.",
+  "add": "Ajouter",
+  "remove": "Supprimer",
+
+  "personalInformation": "Informations personnelles",
+  "fullName": "Nom complet",
+  "jobTitle": "Intitulé du poste",
+  "contactInformation": "Téléphone",
+  "email": "E-mail",
+  "address": "Adresse",
+  "profilePicture": "Photo de profil",
+
+  "socialMedia": "Réseaux sociaux",
+  "link": "Lien",
+
+  "summary": "Profil",
+
+  "education": "Formation",
+  "school": "Établissement",
+  "degree": "Diplôme",
+  "startYear": "Date de début",
+  "endYear": "Date de fin",
+
+  "workExperience": "Expérience professionnelle",
+  "company": "Entreprise",
+  "description": "Description",
+  "keyAchievements": "Réalisations clés",
+  "workType": "Mode de travail",
+  "workTypeNone": "Mode de travail : non affiché",
+  "remote": "Télétravail",
+  "inOffice": "Sur site",
+  "hybrid": "Hybride",
+  "location": "Lieu",
+  "technologiesUsed": "Technologies utilisées",
+  "technologies": "Technologies",
+  "technologyCategory": "Catégorie (ex. Frontend)",
+  "technologyList": "Technologies (ex. React, Node.js)",
+
+  "projects": "Projets",
+  "projectName": "Nom du projet",
+
+  "skillsFormat": "Format des compétences",
+  "simpleSkills": "Compétences simples",
+  "groupedSkills": "Compétences groupées",
+  "technicalSkills": "Compétences techniques",
+  "softSkills": "Savoir-être",
+  "additionalSkills": "Compétences complémentaires",
+  "skill": "Compétence",
+  "skillGroupName": "Nom du groupe (ex. Frontend)",
+  "skillGroupSkills": "Compétences (ex. React, Vue.js)",
+
+  "languages": "Langues",
+  "language": "Langue",
+
+  "certifications": "Certifications",
+  "testsAndCertifications": "Tests et certifications",
+  "testOrCertificate": "Test ou certification",
+
+  "present": "Présent"
+}

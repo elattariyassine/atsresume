@@ -3,9 +3,11 @@ import {handleSkill} from "../utlis/handleSkill";
 import {ResumeContext} from "../../../../builder";
 import { BsTrash3 } from 'react-icons/bs';
 import {removeSkill} from "../utlis/removeSkill";
+import {useTranslation} from "../../../../../i18n/useTranslation";
 
 
 const SkillLine = ({skill, title, index}) => {
+  const {t} = useTranslation();
   const {resumeData, setResumeData} = useContext(ResumeContext);
 
   return (
@@ -14,7 +16,7 @@ const SkillLine = ({skill, title, index}) => {
     >
       <input
         type="text"
-        placeholder={title}
+        placeholder={t('skill')}
         name={title}
         className="w-full mb-0 other-input"
         value={skill}
@@ -23,7 +25,7 @@ const SkillLine = ({skill, title, index}) => {
       <button type="button" onClick={() => {
         removeSkill(title, setResumeData, index)
       }}
-              aria-label="Remove"
+              aria-label={t('remove')}
               className="p-2 text-white bg-fuchsia-700 rounded text-xl">
         <BsTrash3 />
       </button>

@@ -1,6 +1,7 @@
 import { FaCloudUploadAlt, FaCloudDownloadAlt, FaRedoAlt } from "react-icons/fa";
 import React, { useContext, useRef } from "react";
 import {ResumeContext} from "../../builder";
+import {useTranslation} from "../../../i18n/useTranslation";
 
 const JSON_PICKER_OPTIONS = {
   types: [{ description: "JSON resume", accept: { "application/json": [".json"] } }],
@@ -11,6 +12,7 @@ const JSON_PICKER_OPTIONS = {
 const readJsonFile = async (file) => JSON.parse(await file.text());
 
 const LoadUnload = () => {
+  const {t} = useTranslation();
   const { resumeData, loadedResume, loadResume, restoreLoadedResume } = useContext(ResumeContext);
   const fileInputRef = useRef(null);
 
@@ -19,7 +21,7 @@ const LoadUnload = () => {
       loadResume(await readJsonFile(file), { file, handle });
     } catch (error) {
       console.error("Unable to load resume JSON", error);
-      alert(`Couldn't load "${file.name}": it is not a valid resume JSON file.`);
+      alert(t('invalidFile', {file: file.name}));
     }
   };
 
@@ -77,10 +79,10 @@ const LoadUnload = () => {
   return (
     <div className="flex flex-wrap gap-4 mb-2 justify-center">
       <div className="inline-flex flex-row items-center gap-2">
-        <h2 className="text-[1.2rem] text-white">Load Data</h2>
+        <h2 className="text-[1.2rem] text-white">{t('loadData')}</h2>
         <button
           type="button"
-          aria-label="Load Data"
+          aria-label={t('loadData')}
           className="p-2 text-white bg-fuchsia-700 rounded cursor-pointer"
           onClick={handleOpen}
         >
@@ -97,10 +99,10 @@ const LoadUnload = () => {
         />
       </div>
       <div className="inline-flex flex-row items-center gap-2">
-        <h2 className="text-[1.2rem] text-white">Save Data</h2>
+        <h2 className="text-[1.2rem] text-white">{t('saveData')}</h2>
         <button
           type="button"
-          aria-label="Save Data"
+          aria-label={t('saveData')}
           className="p-2 text-white bg-fuchsia-700 rounded"
           onClick={(event) =>
             handleDownload(
@@ -114,11 +116,11 @@ const LoadUnload = () => {
         </button>
       </div>
       <div className="inline-flex flex-row items-center gap-2">
-        <h2 className="text-[1.2rem] text-white">Refresh Data</h2>
+        <h2 className="text-[1.2rem] text-white">{t('refreshData')}</h2>
         <button
           type="button"
-          aria-label="Refresh Data"
-          title={loadedResume ? `Re-read ${loadedResume.file?.name ?? "the loaded file"}` : "Load a file first"}
+          aria-label={t('refreshData')}
+          title={loadedResume ? t('refreshFile', {file: loadedResume.file?.name ?? ''}) : t('refreshDisabled')}
           className="p-2 text-white bg-fuchsia-700 rounded disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={handleRefresh}
           disabled={!loadedResume}

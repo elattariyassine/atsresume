@@ -4,8 +4,10 @@ import {ResumeContext} from "../../../../builder";
 import {removeLanguage} from "../../languages/utils/removeLanguage";
 import {BsTrash3} from "react-icons/bs";
 import {removeProject} from "../utils/removeProject";
+import {useTranslation} from "../../../../../i18n/useTranslation";
 
 const Project = ({project, index}) => {
+  const {t} = useTranslation();
   const {resumeData, setResumeData} = useContext(ResumeContext);
   // TODO add a title for each input
   // TODO change the "start year" to the "start date" for clarity (also in the name of variable)
@@ -21,7 +23,7 @@ const Project = ({project, index}) => {
         {/* Project name */}
         <input
           type="text"
-          placeholder="Project Name"
+          placeholder={t('projectName')}
           name="name"
           className="w-full other-input"
           value={project.name}
@@ -30,7 +32,7 @@ const Project = ({project, index}) => {
         {/* Link */}
         <input
           type="text"
-          placeholder="Link"
+          placeholder={t('link')}
           name="link"
           className="w-full other-input"
           value={project.link}
@@ -39,7 +41,7 @@ const Project = ({project, index}) => {
         {/* Description */}
         <textarea
           type="text"
-          placeholder="Description"
+          placeholder={t('description')}
           name="description"
           className="w-full other-input h-32"
           value={project.description}
@@ -49,7 +51,7 @@ const Project = ({project, index}) => {
         {/* Key achievements */}
         <textarea
           type="text"
-          placeholder="Key Achievements"
+          placeholder={t('keyAchievements')}
           name="keyAchievements"
           className="w-full other-input h-40"
           value={project.keyAchievements}
@@ -59,7 +61,7 @@ const Project = ({project, index}) => {
         <div className="flex-wrap-gap-2">
           <input
             type="date"
-            placeholder="Start Year"
+            placeholder={t('startYear')}
             name="startYear"
             className="flex-1 m-0 other-input"
             value={project.startYear}
@@ -68,7 +70,7 @@ const Project = ({project, index}) => {
           {/* End data */}
           <input
             type="date"
-            placeholder="End Year"
+            placeholder={t('endYear')}
             name="endYear"
             className="flex-1 m-0 other-input"
             value={project.endYear}
@@ -81,7 +83,7 @@ const Project = ({project, index}) => {
         onClick={() => {
           removeProject(resumeData, setResumeData, index)
         }}
-        aria-label="Remove"
+        aria-label={t('remove')}
         className="p-2 h-fit text-white bg-fuchsia-700 rounded text-xl"
       >
         <BsTrash3/>

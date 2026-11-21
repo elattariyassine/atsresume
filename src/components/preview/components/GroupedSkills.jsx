@@ -1,4 +1,7 @@
+import {useTranslation} from "../../../i18n/useTranslation";
+
 const GroupedSkills = ({title, groups = []}) => {
+  const {skillTitle} = useTranslation();
   const visibleGroups = groups.filter(
     (group) => group.groupName?.trim() || group.skills?.trim()
   );
@@ -7,7 +10,7 @@ const GroupedSkills = ({title, groups = []}) => {
 
   return (
     <>
-      <h2 className="section-title mb-1 border-b-2 border-gray-300">{title}</h2>
+      <h2 className="section-title mb-1 border-b-2 border-gray-300">{skillTitle(title)}</h2>
       {visibleGroups.map((group, index) => (
         <div key={index} className="mb-1">
           {group.groupName && (

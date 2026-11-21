@@ -1,6 +1,6 @@
 "use client"
 
-import React, {createContext, useState} from "react";
+import React, {createContext, useEffect, useState} from "react";
 import Meta from "../components/meta/Meta";
 import FormCloseOpenBtn from "../components/FormCloseOpenBtn";
 import Preview from "../components/preview/ui/Preview";
@@ -28,6 +28,11 @@ export default function Builder() {
     setLoadedResumeState({snapshot: normalized, ...source});
     setResumeData(normalizeResumeData(normalized));
   };
+
+  // Keep the document language in sync with the resume, so printed PDFs carry it.
+  useEffect(() => {
+    document.documentElement.lang = resumeData.locale;
+  }, [resumeData.locale]);
 
   const restoreLoadedResume = () => {
     if (loadedResume) setResumeData(normalizeResumeData(loadedResume.snapshot));

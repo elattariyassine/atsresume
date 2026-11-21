@@ -1,0 +1,71 @@
+{
+  "resumeLanguage": "Resume Language",
+  "layout": "Layout",
+  "twoColumns": "2 Columns",
+  "oneColumn": "1 Column",
+
+  "loadData": "Load Data",
+  "saveData": "Save Data",
+  "refreshData": "Refresh Data",
+  "refreshFile": "Re-read {file}",
+  "refreshDisabled": "Load a file first",
+  "invalidFile": "Couldn't load \"{file}\": it is not a valid resume JSON file.",
+  "add": "Add",
+  "remove": "Remove",
+
+  "personalInformation": "Personal Information",
+  "fullName": "Full Name",
+  "jobTitle": "Job Title",
+  "contactInformation": "Contact Information",
+  "email": "Email",
+  "address": "Address",
+  "profilePicture": "Profile Picture",
+
+  "socialMedia": "Social Media",
+  "link": "Link",
+
+  "summary": "Summary",
+
+  "education": "Education",
+  "school": "School",
+  "degree": "Degree",
+  "startYear": "Start Year",
+  "endYear": "End Year",
+
+  "workExperience": "Work Experience",
+  "company": "Company",
+  "description": "Description",
+  "keyAchievements": "Key Achievements",
+  "workType": "Work type",
+  "workTypeNone": "Work type: not shown",
+  "remote": "Remote",
+  "inOffice": "In-Office",
+  "hybrid": "Hybrid",
+  "location": "Location",
+  "technologiesUsed": "Technologies Used",
+  "technologies": "Technologies",
+  "technologyCategory": "Category (e.g. Frontend)",
+  "technologyList": "Technologies (e.g. React, Node.js)",
+
+  "projects": "Projects",
+  "projectName": "Project Name",
+
+  "skillsFormat": "Skills Format",
+  "simpleSkills": "Simple Skills",
+  "groupedSkills": "Grouped Skills",
+  "technicalSkills": "Technical Skills",
+  "softSkills": "Soft Skills",
+  "additionalSkills": "Additional Skills",
+  "skill": "Skill",
+  "skillGroupName": "Group name (e.g. Frontend)",
+  "skillGroupSkills": "Skills (e.g. React, Vue.js)",
+
+  "languages": "Languages",
+  "language": "Language",
+
+  "certifications": "Certifications",
+  "testsAndCertifications": "Tests & Certifications",
+  "testOrCertificate": "Test or certificate",
+
+  "present": "Present"
+}

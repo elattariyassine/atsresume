@@ -3,10 +3,12 @@ import {ResumeContext} from "../../../../builder";
 import {addCertificate} from "../utils/addCertificate";
 import TestAndCertificateLine from "../components/TestAndCertificateLine";
 import {MdAddCircle} from "react-icons/md";
+import {useTranslation} from "../../../../../i18n/useTranslation";
 
 const TestsAndCertifications = () => {
+  const {t} = useTranslation();
   const {resumeData, setResumeData} = useContext(ResumeContext);
-  const title = "Tests & Certifications";
+  const title = t('testsAndCertifications');
 
   return (
     <div className="flex-col-gap-2">
@@ -24,7 +26,7 @@ const TestsAndCertifications = () => {
               onClick={() => {
                 addCertificate(resumeData, setResumeData)
               }}
-              aria-label="Add"
+              aria-label={t('add')}
               className="p-2 w-[37px] text-white bg-fuchsia-700 rounded text-xl">
         <MdAddCircle/>
       </button>

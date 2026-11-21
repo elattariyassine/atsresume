@@ -2,8 +2,10 @@ import React from 'react';
 import {handleLanguage} from "../utils/handleLanguage";
 import {BsTrash3} from "react-icons/bs";
 import {removeLanguage} from "../utils/removeLanguage";
+import {useTranslation} from "../../../../../i18n/useTranslation";
 
 const LanguageLine = ({resumeData, setResumeData, lang, index}) => {
+  const {t} = useTranslation();
   // TODO replace hardcoded variables
 
   return (
@@ -12,7 +14,7 @@ const LanguageLine = ({resumeData, setResumeData, lang, index}) => {
     >
       <input
         type="text"
-        placeholder={"Language"}
+        placeholder={t('language')}
         name="language"
         className="w-full mb-0 other-input"
         value={lang}
@@ -23,7 +25,7 @@ const LanguageLine = ({resumeData, setResumeData, lang, index}) => {
         onClick={() => {
           removeLanguage(resumeData, setResumeData, index)
         }}
-        aria-label="Remove"
+        aria-label={t('remove')}
         className="p-2 text-white bg-fuchsia-700 rounded text-xl"
       >
         <BsTrash3/>

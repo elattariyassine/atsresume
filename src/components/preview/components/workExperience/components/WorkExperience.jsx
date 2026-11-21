@@ -1,6 +1,7 @@
 import React from 'react';
 import DateRange from "../../../../utility/DateRange";
 import dynamic from "next/dynamic";
+import {useTranslation} from "../../../../../i18n/useTranslation";
 
 const Droppable = dynamic(
   () => import("@hello-pangea/dnd").then((mod) => mod.Droppable),
@@ -12,9 +13,10 @@ const Draggable = dynamic(
 );
 
 const WorkExperience = ({item, index}) => {
+  const {t, workTypeLabel} = useTranslation();
   const workMeta = [
     item.location?.trim(),
-    item.workType && item.workType !== "None" ? item.workType : null,
+    item.workType && item.workType !== "None" ? workTypeLabel(item.workType) : null,
   ].filter(Boolean).join(" · ");
   const technologies = (item.technologies || []).filter(
     (technology) => technology.category?.trim() || technology.tech?.trim()
@@ -98,7 +100,7 @@ const WorkExperience = ({item, index}) => {
 
           {technologies.length > 0 && (
             <div className="mb-1">
-              <p className="content i-semi-bold">Technologies</p>
+              <p className="content i-semi-bold">{t('technologies')}</p>
               {technologies.map((technology, techIndex) => (
                 <p key={techIndex} className="content">
                   {technology.category && (
