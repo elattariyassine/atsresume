@@ -4,7 +4,6 @@ import {ResumeContext} from "../../../../builder";
 import { BsTrash3 } from 'react-icons/bs';
 import {removeSkill} from "../utlis/removeSkill";
 
-;
 
 const SkillLine = ({skill, title, index}) => {
   const {resumeData, setResumeData} = useContext(ResumeContext);
@@ -22,7 +21,6 @@ const SkillLine = ({skill, title, index}) => {
         onChange={(e) => handleSkill(e, index, title, resumeData, setResumeData)}
       />
       <button type="button" onClick={() => {
-        console.log("remove", title, index)
         removeSkill(title, setResumeData, index)
       }}
               aria-label="Remove"

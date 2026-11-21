@@ -39,7 +39,6 @@ export default function Builder() {
 
   const handleChange = (e) => {
     setResumeData({...resumeData, [e.target.name]: e.target.value});
-    console.log(resumeData);
   };
 
   return (

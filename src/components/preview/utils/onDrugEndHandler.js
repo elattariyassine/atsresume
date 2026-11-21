@@ -1,5 +1,4 @@
 export const onDragEndHandler = (result, resumeData, setResumeData) => {
-  console.log("handler")
     const { destination, source } = result;
 
     if (!destination) return;
