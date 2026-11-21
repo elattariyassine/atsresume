@@ -1,75 +1,40 @@
 import React, {useContext} from 'react';
 import {handleEducation} from "../units/handleEducation";
 import {ResumeContext} from "../../../../builder";
-import {BsTrash3} from "react-icons/bs";
 import {removeEducation} from "../units/removeEducation";
 import {useTranslation} from "../../../../../i18n/useTranslation";
+import {Field, ItemCard, TextInput, isBlankItem} from "../../../ui/kit";
 
-const Education = ({education, index}) => {
-  const {t} = useTranslation();
+const Education = ({education, index, total, onMove, card, onRemoved}) => {
+  const {t, formatDateRange} = useTranslation();
   const {resumeData, setResumeData} = useContext(ResumeContext);
+  const onChange = (e) => handleEducation(resumeData, setResumeData, e, index);
 
   return (
-    <div
-      className="flex w-fill gap-5 items-top"
+    <ItemCard
+      title={education.school || education.degree || t("untitled")}
+      subtitle={[education.degree, formatDateRange(education.startYear, education.endYear)].filter(Boolean).join(" · ")}
+      index={index}
+      total={total}
+      onMove={onMove}
+      onRemove={() => { removeEducation(resumeData, setResumeData, index); onRemoved(); }}
+      {...card(isBlankItem(education))}
     >
-      <div
-        className="flex-1"
-      >
-        <input
-          type="text"
-          placeholder={t('school')}
-          name="school"
-          className="w-full other-input"
-          value={education.school}
-          onChange={(e) =>
-            handleEducation(resumeData, setResumeData, e, index)
-          }
-        />
-        <input
-          type="text"
-          placeholder={t('degree')}
-          name="degree"
-          className="w-full other-input"
-          value={education.degree}
-          onChange={(e) =>
-            handleEducation(resumeData, setResumeData, e, index)
-          }
-        />
-        <div className="flex-wrap-gap-2">
-          <input
-            type="date"
-            placeholder={t('startYear')}
-            name="startYear"
-            className="flex-1 m-0 other-input"
-            value={education.startYear}
-            onChange={(e) =>
-              handleEducation(resumeData, setResumeData, e, index)
-            }
-          />
-          <input
-            type="date"
-            placeholder={t('endYear')}
-            name="endYear"
-            className="flex-1 m-0 other-input"
-            value={education.endYear}
-            onChange={(e) =>
-              handleEducation(resumeData, setResumeData, e, index)
-            }
-          />
-        </div>
+      <div className="form-grid">
+        <Field label={t("school")} className="sm:col-span-2">
+          <TextInput name="school" value={education.school} onChange={onChange}/>
+        </Field>
+        <Field label={t("degree")} className="sm:col-span-2">
+          <TextInput name="degree" value={education.degree} onChange={onChange}/>
+        </Field>
+        <Field label={t("startYear")}>
+          <TextInput type="date" name="startYear" value={education.startYear} onChange={onChange}/>
+        </Field>
+        <Field label={t("endYear")}>
+          <TextInput type="date" name="endYear" value={education.endYear} onChange={onChange}/>
+        </Field>
       </div>
-      <button
-        type="button"
-        onClick={() => {
-          removeEducation(resumeData, setResumeData, index)
-        }}
-        aria-label={t('remove')}
-        className="p-2 h-fit text-white bg-fuchsia-700 rounded text-xl"
-      >
-        <BsTrash3/>
-      </button>
-    </div>
+    </ItemCard>
   );
 };
 

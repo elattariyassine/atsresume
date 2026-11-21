@@ -79,6 +79,175 @@
         @apply hover:bg-gray-100 hover:cursor-text outline-none;
     }
 
+    /* ---------- Editor panel ---------- */
+    .form-panel{
+        @apply bg-slate-50 text-slate-800 md:max-w-[40%] md:h-screen md:overflow-y-scroll w-full;
+    }
+
+    .form-panel-body{
+        @apply flex flex-col gap-3 p-3 sm:p-4;
+    }
+
+    .toolbar{
+        @apply sticky top-0 z-20 flex flex-wrap items-center gap-2 px-3 sm:px-4 py-2 bg-white/95 backdrop-blur border-b border-slate-200;
+    }
+
+    .toolbar-button{
+        @apply inline-flex items-center gap-1.5 h-9 px-3 rounded-md text-sm font-medium text-slate-700 bg-white border border-slate-300 hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-fuchsia-600 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white;
+    }
+
+    .toolbar-button-primary{
+        @apply text-white bg-fuchsia-700 border-fuchsia-700 hover:bg-fuchsia-800;
+    }
+
+    .file-chip{
+        @apply inline-flex items-center gap-1.5 min-w-0 max-w-full h-7 px-2.5 rounded-full text-xs text-slate-600 bg-slate-100;
+    }
+
+    .file-chip-dirty{
+        @apply text-amber-800 bg-amber-100;
+    }
+
+    .form-section{
+        @apply bg-white border border-slate-200 rounded-lg shadow-sm;
+    }
+
+    .form-section-heading{
+        @apply m-0;
+    }
+
+    .form-section-toggle{
+        @apply flex items-center gap-2 w-full px-4 py-3 text-left text-[0.95rem] font-semibold text-slate-900 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-fuchsia-600;
+    }
+
+    .form-count{
+        @apply px-1.5 min-w-[1.25rem] text-center rounded-full text-xs font-medium text-fuchsia-800 bg-fuchsia-100;
+    }
+
+    .form-chevron{
+        @apply ml-auto shrink-0 text-slate-400 transition-transform;
+    }
+
+    .form-section-body{
+        @apply flex flex-col gap-3 px-4 pb-4;
+    }
+
+    .field{
+        @apply flex flex-col gap-1 min-w-0;
+    }
+
+    .field-head{
+        @apply flex items-baseline justify-between gap-2;
+    }
+
+    .field-label{
+        @apply text-xs font-medium text-slate-600;
+    }
+
+    .field-counter{
+        @apply text-xs tabular-nums text-slate-400;
+    }
+
+    .field-counter-full{
+        @apply text-amber-700;
+    }
+
+    .form-input{
+        @apply w-full min-w-0 h-9 px-2.5 rounded-md text-sm text-slate-900 bg-white border border-slate-300 placeholder:text-slate-400 focus:outline-none focus:border-fuchsia-600 focus:ring-2 focus:ring-fuchsia-600/20;
+    }
+
+    .form-textarea{
+        @apply h-auto min-h-[6rem] py-2 leading-snug resize-y;
+    }
+
+    .form-grid{
+        @apply grid grid-cols-1 sm:grid-cols-2 gap-3;
+    }
+
+    .item-card{
+        @apply border border-slate-200 rounded-md bg-slate-50/60;
+    }
+
+    .item-card-head{
+        @apply flex items-center gap-1 pr-1.5;
+    }
+
+    .item-card-toggle{
+        @apply flex flex-1 items-center gap-2 min-w-0 px-3 py-2 text-left rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-fuchsia-600;
+    }
+
+    .item-card-toggle .form-chevron{
+        @apply ml-0 order-first;
+    }
+
+    .item-card-title{
+        @apply block truncate text-sm font-medium text-slate-900;
+    }
+
+    .item-card-subtitle{
+        @apply block truncate text-xs text-slate-500;
+    }
+
+    .item-card-body{
+        @apply flex flex-col gap-3 px-3 pb-3 pt-1 border-t border-slate-200;
+    }
+
+    .icon-button{
+        @apply inline-flex items-center justify-center shrink-0 w-8 h-8 rounded-md text-slate-500 hover:text-slate-900 hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-fuchsia-600 disabled:opacity-30 disabled:hover:bg-transparent disabled:cursor-not-allowed;
+    }
+
+    .icon-button-danger{
+        @apply hover:text-red-700 hover:bg-red-50;
+    }
+
+    .list-row{
+        @apply flex items-center gap-1.5;
+    }
+
+    .add-button{
+        @apply inline-flex items-center justify-center gap-1.5 w-full h-9 rounded-md text-sm font-medium text-fuchsia-800 border border-dashed border-fuchsia-300 hover:bg-fuchsia-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-fuchsia-600;
+    }
+
+    .segmented{
+        @apply flex flex-col gap-1 min-w-0 border-0 p-0 m-0;
+    }
+
+    .segmented-track{
+        @apply flex p-0.5 rounded-md bg-slate-100 border border-slate-200;
+    }
+
+    .segmented-option{
+        @apply flex-1 min-w-0 cursor-pointer;
+    }
+
+    .segmented-label{
+        @apply block px-2 py-1.5 rounded text-center text-sm truncate text-slate-600 peer-checked:bg-white peer-checked:text-fuchsia-800 peer-checked:font-medium peer-checked:shadow-sm peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-fuchsia-600;
+    }
+
+    .sub-heading{
+        @apply text-xs font-semibold uppercase tracking-wide text-slate-500;
+    }
+
+    .photo-picker{
+        @apply flex items-center gap-3;
+    }
+
+    .photo-thumb{
+        @apply w-14 h-14 shrink-0 rounded-full object-cover bg-slate-200 border border-slate-300;
+    }
+
+    .toast-region{
+        @apply fixed z-50 bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none;
+    }
+
+    .toast{
+        @apply px-3 py-2 rounded-md text-sm text-white bg-slate-900 shadow-lg;
+    }
+
+    .toast-error{
+        @apply bg-red-700;
+    }
+
 }
 
 .name{

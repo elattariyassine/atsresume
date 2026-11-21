@@ -1,47 +1,33 @@
 import React, {useContext} from 'react';
 import {handleSocialMedia} from "../units/handleSocialMedia";
 import {ResumeContext} from "../../../../builder";
-import {removeLanguage} from "../../languages/utils/removeLanguage";
-import {BsTrash3} from "react-icons/bs";
 import {removeSocialMedia} from "../units/removeSocialMedia";
 import {useTranslation} from "../../../../../i18n/useTranslation";
+import {ListRow, TextInput} from "../../../ui/kit";
 
 const SocialMedia = ({socialMedia, index}) => {
   const {t} = useTranslation();
   const {resumeData, setResumeData} = useContext(ResumeContext);
+  const onChange = (e) => handleSocialMedia(resumeData, setResumeData, e, index);
+
   return (
-    <div className="flex w-fill gap-5 items-top">
-      <div
-        className="flex-wrap-gap-2"
-      >
-        <input
-          type="text"
-          placeholder={t('socialMedia')}
-          name="socialMedia"
-          className="w-full mb-0 other-input"
-          value={socialMedia.socialMedia}
-          onChange={(e) => handleSocialMedia(resumeData, setResumeData, e, index)}
-        />
-        <input
-          type="text"
-          placeholder={t('link')}
-          name="link"
-          className="w-full mb-0 other-input"
-          value={socialMedia.link}
-          onChange={(e) => handleSocialMedia(resumeData, setResumeData, e, index)}
-        />
-      </div>
-      <button
-        type="button"
-        onClick={() => {
-          removeSocialMedia(resumeData, setResumeData, index)
-        }}
-        aria-label={t('remove')}
-        className="p-2 text-white h-fit bg-fuchsia-700 rounded text-xl"
-      >
-        <BsTrash3/>
-      </button>
-    </div>
+    <ListRow removeLabel={t("remove")} onRemove={() => removeSocialMedia(resumeData, setResumeData, index)}>
+      <TextInput
+        name="socialMedia"
+        aria-label={t("network")}
+        placeholder={t("network")}
+        className="basis-28 shrink-0"
+        value={socialMedia.socialMedia}
+        onChange={onChange}
+      />
+      <TextInput
+        name="link"
+        aria-label={t("link")}
+        placeholder="github.com/username"
+        value={socialMedia.link}
+        onChange={onChange}
+      />
+    </ListRow>
   );
 };
 

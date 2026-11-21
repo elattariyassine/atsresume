@@ -1,94 +1,48 @@
 import React, {useContext} from 'react';
 import {handleProject} from "../utils/handleProject";
 import {ResumeContext} from "../../../../builder";
-import {removeLanguage} from "../../languages/utils/removeLanguage";
-import {BsTrash3} from "react-icons/bs";
 import {removeProject} from "../utils/removeProject";
 import {useTranslation} from "../../../../../i18n/useTranslation";
+import {Field, ItemCard, TextArea, TextInput, isBlankItem} from "../../../ui/kit";
 
-const Project = ({project, index}) => {
-  const {t} = useTranslation();
+const DESCRIPTION_MAX = 250;
+
+const Project = ({project, index, total, onMove, card, onRemoved}) => {
+  const {t, formatDateRange} = useTranslation();
   const {resumeData, setResumeData} = useContext(ResumeContext);
-  // TODO add a title for each input
-  // TODO change the "start year" to the "start date" for clarity (also in the name of variable)
-  // TODO change the "end year" to the "end date" for clarity  (also in the name of variable)
+  const onChange = (e) => handleProject(resumeData, setResumeData, e, index);
 
   return (
-    <div
-      className="flex w-fill gap-5 items-top"
+    <ItemCard
+      title={project.name || t("untitled")}
+      subtitle={formatDateRange(project.startYear, project.endYear)}
+      index={index}
+      total={total}
+      onMove={onMove}
+      onRemove={() => { removeProject(resumeData, setResumeData, index); onRemoved(); }}
+      {...card(isBlankItem(project))}
     >
-      <div
-        className="flex-1"
-      >
-        {/* Project name */}
-        <input
-          type="text"
-          placeholder={t('projectName')}
-          name="name"
-          className="w-full other-input"
-          value={project.name}
-          onChange={(e) => handleProject(resumeData, setResumeData, e, index)}
-        />
-        {/* Link */}
-        <input
-          type="text"
-          placeholder={t('link')}
-          name="link"
-          className="w-full other-input"
-          value={project.link}
-          onChange={(e) => handleProject(resumeData, setResumeData, e, index)}
-        />
-        {/* Description */}
-        <textarea
-          type="text"
-          placeholder={t('description')}
-          name="description"
-          className="w-full other-input h-32"
-          value={project.description}
-          maxLength="250"
-          onChange={(e) => handleProject(resumeData, setResumeData, e, index)}
-        />
-        {/* Key achievements */}
-        <textarea
-          type="text"
-          placeholder={t('keyAchievements')}
-          name="keyAchievements"
-          className="w-full other-input h-40"
-          value={project.keyAchievements}
-          onChange={(e) => handleProject(resumeData, setResumeData, e, index)}
-        />
-        {/* Start date */}
-        <div className="flex-wrap-gap-2">
-          <input
-            type="date"
-            placeholder={t('startYear')}
-            name="startYear"
-            className="flex-1 m-0 other-input"
-            value={project.startYear}
-            onChange={(e) => handleProject(resumeData, setResumeData, e, index)}
-          />
-          {/* End data */}
-          <input
-            type="date"
-            placeholder={t('endYear')}
-            name="endYear"
-            className="flex-1 m-0 other-input"
-            value={project.endYear}
-            onChange={(e) => handleProject(resumeData, setResumeData, e, index)}
-          />
-        </div>
+      <div className="form-grid">
+        <Field label={t("projectName")}>
+          <TextInput name="name" value={project.name} onChange={onChange}/>
+        </Field>
+        <Field label={t("link")}>
+          <TextInput name="link" value={project.link} onChange={onChange}/>
+        </Field>
+        <Field label={t("startYear")}>
+          <TextInput type="date" name="startYear" value={project.startYear} onChange={onChange}/>
+        </Field>
+        <Field label={t("endYear")}>
+          <TextInput type="date" name="endYear" value={project.endYear} onChange={onChange}/>
+        </Field>
       </div>
-      <button
-        type="button"
-        onClick={() => {
-          removeProject(resumeData, setResumeData, index)
-        }}
-        aria-label={t('remove')}
-        className="p-2 h-fit text-white bg-fuchsia-700 rounded text-xl"
-      >
-        <BsTrash3/>
-      </button>
-    </div>
+      <Field label={t("description")} counter={{value: (project.description || "").length, max: DESCRIPTION_MAX}}>
+        <TextArea name="description" rows={3} value={project.description} maxLength={DESCRIPTION_MAX} onChange={onChange}/>
+      </Field>
+      <Field label={t("keyAchievements")}>
+        <TextArea name="keyAchievements" rows={5} value={project.keyAchievements} onChange={onChange}/>
+      </Field>
+    </ItemCard>
   );
 };
 

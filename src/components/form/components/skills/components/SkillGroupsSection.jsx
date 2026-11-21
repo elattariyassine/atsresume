@@ -1,58 +1,44 @@
 import React, {useContext} from "react";
-import {BsTrash3} from "react-icons/bs";
-import {MdAddCircle} from "react-icons/md";
 import {ResumeContext} from "../../../../builder";
 import {addSkillGroup, handleSkillGroup, removeSkillGroup} from "../utlis/groupedSkills";
 import {useTranslation} from "../../../../../i18n/useTranslation";
+import {AddButton, ListRow, TextInput} from "../../../ui/kit";
 
 const SkillGroupsSection = ({section}) => {
   const {t, skillTitle} = useTranslation();
   const {resumeData, setResumeData} = useContext(ResumeContext);
   const {title, groups = []} = section;
+  const update = (groupIndex, field) => (e) =>
+    handleSkillGroup(resumeData, setResumeData, title, groupIndex, field, e.target.value);
 
   return (
-    <div className="flex-col-gap-2">
-      <h2 className="input-title">{skillTitle(title)}</h2>
+    <div className="flex flex-col gap-2">
+      <h3 className="sub-heading">{skillTitle(title)}</h3>
       {groups.map((group, groupIndex) => (
-        <div key={groupIndex} className="flex gap-2 items-center">
-          <input
-            type="text"
-            placeholder={t('skillGroupName')}
-            aria-label={`${skillTitle(title)}: ${t('skillGroupName')}`}
-            className="flex-1 min-w-0 mb-0 other-input"
+        <ListRow
+          key={groupIndex}
+          removeLabel={`${t("remove")}: ${skillTitle(title)}`}
+          onRemove={() => removeSkillGroup(resumeData, setResumeData, title, groupIndex)}
+        >
+          <TextInput
+            placeholder={t("skillGroupName")}
+            aria-label={`${skillTitle(title)}: ${t("skillGroupName")}`}
+            className="basis-2/5 shrink-0"
             value={group.groupName}
-            onChange={(e) =>
-              handleSkillGroup(resumeData, setResumeData, title, groupIndex, "groupName", e.target.value)
-            }
+            onChange={update(groupIndex, "groupName")}
           />
-          <input
-            type="text"
-            placeholder={t('skillGroupSkills')}
-            aria-label={`${skillTitle(title)}: ${t('skillGroupSkills')}`}
-            className="flex-[2] min-w-0 mb-0 other-input"
+          <TextInput
+            placeholder={t("skillGroupSkills")}
+            aria-label={`${skillTitle(title)}: ${t("skillGroupSkills")}`}
             value={group.skills}
-            onChange={(e) =>
-              handleSkillGroup(resumeData, setResumeData, title, groupIndex, "skills", e.target.value)
-            }
+            onChange={update(groupIndex, "skills")}
           />
-          <button
-            type="button"
-            onClick={() => removeSkillGroup(resumeData, setResumeData, title, groupIndex)}
-            aria-label={`${t('remove')}: ${skillTitle(title)}`}
-            className="p-2 text-white bg-fuchsia-700 rounded text-xl"
-          >
-            <BsTrash3/>
-          </button>
-        </div>
+        </ListRow>
       ))}
-      <button
-        type="button"
+      <AddButton
+        label={`${t("addSkillGroup")} · ${skillTitle(title)}`}
         onClick={() => addSkillGroup(resumeData, setResumeData, title)}
-        aria-label={`${t('add')}: ${skillTitle(title)}`}
-        className="p-2 w-[37px] text-white bg-fuchsia-700 rounded text-xl"
-      >
-        <MdAddCircle/>
-      </button>
+      />
     </div>
   );
 };

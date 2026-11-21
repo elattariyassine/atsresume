@@ -1,36 +1,22 @@
 import React from 'react';
 import {handleLanguage} from "../utils/handleLanguage";
-import {BsTrash3} from "react-icons/bs";
 import {removeLanguage} from "../utils/removeLanguage";
 import {useTranslation} from "../../../../../i18n/useTranslation";
+import {ListRow, TextInput} from "../../../ui/kit";
 
 const LanguageLine = ({resumeData, setResumeData, lang, index}) => {
   const {t} = useTranslation();
-  // TODO replace hardcoded variables
 
   return (
-    <div
-      className="flex gap-5 items-center"
-    >
-      <input
-        type="text"
-        placeholder={t('language')}
+    <ListRow removeLabel={t("remove")} onRemove={() => removeLanguage(resumeData, setResumeData, index)}>
+      <TextInput
+        aria-label={t("language")}
+        placeholder={t("language")}
         name="language"
-        className="w-full mb-0 other-input"
         value={lang}
         onChange={(e) => handleLanguage(resumeData, setResumeData, e, index, "languages")}
       />
-      <button
-        type="button"
-        onClick={() => {
-          removeLanguage(resumeData, setResumeData, index)
-        }}
-        aria-label={t('remove')}
-        className="p-2 text-white bg-fuchsia-700 rounded text-xl"
-      >
-        <BsTrash3/>
-      </button>
-    </div>
+    </ListRow>
   );
 };
 

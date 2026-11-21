@@ -11,7 +11,8 @@ This fork of [sauravhathi/atsresume](https://github.com/sauravhathi/atsresume) a
 - **Grouped skills**, e.g. *Frontend: React, Vue.js*, as an alternative to flat lists
 - **Work type, location and technologies** on each work experience
 - **Refresh from file**: re-read a loaded JSON resume after editing it in another editor; older resume files load with sensible defaults
-- Drag and drop working again on React 19, and no watermark on printed PDFs
+- **A redesigned editor**: one toolbar for open/save/reload with unsaved-changes status, a settings card for language, layout and skills format, collapsible sections and reorderable cards
+- Drag and drop working again on React 19, and clean PDFs: no watermark and no browser URL/date header
 
 Each feature is described in [docs/features](docs/features/README.md).
 

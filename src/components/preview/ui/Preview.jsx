@@ -10,7 +10,7 @@ import LeftSide from "../components/LeftSide";
 import RightSide from "../components/RightSide";
 import A4PageWrapper from "../components/A4PageWrapper";
 import {onDragEndHandler} from "../utils/onDrugEndHandler";
-import LayoutToggle from "../components/LayoutToggle";
+import PreviewToolbar from "../components/PreviewToolbar";
 import OneColumn from "../components/oneColumn/OneColumn";
 
 const DragDropContext = dynamic(
@@ -36,7 +36,7 @@ const Preview = () => {
 
   return (
     <div className="md:max-w-[60%] sticky top-0 preview rm-padding-print p-6 md:overflow-y-scroll md:h-screen">
-      <LayoutToggle/>
+      <PreviewToolbar/>
       <A4PageWrapper>
         <ModalHighlightMenu/>
         <DragDropContext

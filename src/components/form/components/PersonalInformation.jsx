@@ -1,68 +1,76 @@
-import React, {useContext} from "react";
+import React, {useContext, useRef} from "react";
+import {BsPersonCircle} from "react-icons/bs";
 import {ResumeContext} from "../../builder";
 import {useTranslation} from "../../../i18n/useTranslation";
+import {Field, Section, TextInput} from "../ui/kit";
 
-const PersonalInformation = ({}) => {
+const PhotoPicker = () => {
   const {t} = useTranslation();
-  const {resumeData, setResumeData, handleProfilePicture, handleChange} =
-    useContext(ResumeContext);
+  const {resumeData, setResumeData, handleProfilePicture} = useContext(ResumeContext);
+  const inputRef = useRef(null);
+  const photo = resumeData.profilePicture;
 
   return (
-    <div className="flex-col-gap-2">
-      <h2 className="input-title">{t('personalInformation')}</h2>
-      <div className="grid-4">
+    <div className="field sm:col-span-2">
+      <span className="field-label">{t("photo")}</span>
+      <div className="photo-picker">
+        {photo
+          // eslint-disable-next-line @next/next/no-img-element
+          ? <img src={photo} alt="" className="photo-thumb"/>
+          : <BsPersonCircle className="photo-thumb p-2 text-slate-400" aria-hidden="true"/>}
+        <button type="button" className="toolbar-button" onClick={() => inputRef.current?.click()}>
+          {photo ? t("changePhoto") : t("uploadPhoto")}
+        </button>
+        {photo && (
+          <button
+            type="button"
+            className="text-sm text-slate-600 underline hover:text-red-700"
+            onClick={() => setResumeData({...resumeData, profilePicture: ""})}
+          >
+            {t("removePhoto")}
+          </button>
+        )}
         <input
-          type="text"
-          placeholder={t('fullName')}
-          name="name"
-          className="pi"
-          value={resumeData.name}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          placeholder={t('jobTitle')}
-          name="position"
-          className="pi"
-          value={resumeData.position}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          placeholder={t('contactInformation')}
-          name="contactInformation"
-          className="pi"
-          value={resumeData.contactInformation}
-          onChange={handleChange}
-          minLength="10"
-          maxLength="15"
-        />
-        <input
-          type="email"
-          placeholder={t('email')}
-          name="email"
-          className="pi"
-          value={resumeData.email}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          placeholder={t('address')}
-          name="address"
-          className="pi"
-          value={resumeData.address}
-          onChange={handleChange}
-        />
-        <input
+          ref={inputRef}
           type="file"
-          name="profileImage"
           accept="image/*"
-          className="profileInput"
-          onChange={handleProfilePicture}
-          placeholder={t('profilePicture')}
+          className="hidden"
+          aria-label={t("uploadPhoto")}
+          onChange={(e) => {
+            handleProfilePicture(e);
+            e.target.value = "";
+          }}
         />
       </div>
     </div>
+  );
+};
+
+const PersonalInformation = () => {
+  const {t} = useTranslation();
+  const {resumeData, handleChange} = useContext(ResumeContext);
+
+  return (
+    <Section title={t("personalInformation")}>
+      <div className="form-grid">
+        <Field label={t("fullName")}>
+          <TextInput name="name" autoComplete="name" value={resumeData.name} onChange={handleChange}/>
+        </Field>
+        <Field label={t("jobTitle")}>
+          <TextInput name="position" value={resumeData.position} onChange={handleChange}/>
+        </Field>
+        <Field label={t("email")}>
+          <TextInput type="email" name="email" autoComplete="email" value={resumeData.email} onChange={handleChange}/>
+        </Field>
+        <Field label={t("contactInformation")}>
+          <TextInput type="tel" name="contactInformation" autoComplete="tel" value={resumeData.contactInformation} onChange={handleChange}/>
+        </Field>
+        <Field label={t("address")} className="sm:col-span-2">
+          <TextInput name="address" value={resumeData.address} onChange={handleChange}/>
+        </Field>
+        <PhotoPicker/>
+      </div>
+    </Section>
   );
 };
 
