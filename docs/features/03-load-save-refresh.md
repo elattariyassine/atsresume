@@ -7,7 +7,8 @@ Makes editing a resume JSON file outside the app (in a text editor) a smooth wor
 - The **Load Data** button opens a file picker for `.json` files.
 - In browsers with the File System Access API (Chrome, Edge), it uses `showOpenFilePicker`, which returns a handle to the file on disk. Elsewhere, it falls back to a hidden `<input type="file">`.
 - Cancelling the picker does nothing.
-- Invalid JSON is reported in the console and leaves the current resume unchanged (no crash).
+- Invalid JSON shows an alert naming the file, is logged to the console, and leaves the current resume unchanged.
+- The fallback input is cleared after each pick, so choosing the same file again reloads it.
 
 ## Save
 
@@ -21,7 +22,7 @@ A third button, **Refresh Data**, re-reads the last loaded file:
 2. Otherwise, it re-reads the `File` object from the fallback input.
 3. As a last resort, it restores the snapshot taken when the file was loaded, discarding in-app edits.
 
-The button is disabled (dimmed, not clickable) until a file has been loaded.
+The button is disabled (dimmed, not clickable) until a file has been loaded; its tooltip names the file it will re-read. The loaded-file state lives in the builder, so it survives hiding and re-opening the form.
 
 ## Backward compatibility
 

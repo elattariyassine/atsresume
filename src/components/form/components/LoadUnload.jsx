@@ -1,19 +1,66 @@
-import { FaCloudUploadAlt, FaCloudDownloadAlt } from "react-icons/fa";
-import React, { useContext } from "react";
+import { FaCloudUploadAlt, FaCloudDownloadAlt, FaRedoAlt } from "react-icons/fa";
+import React, { useContext, useRef } from "react";
 import {ResumeContext} from "../../builder";
 
-const LoadUnload = () => {
-  const { resumeData, setResumeData } = useContext(ResumeContext);
+const JSON_PICKER_OPTIONS = {
+  types: [{ description: "JSON resume", accept: { "application/json": [".json"] } }],
+  excludeAcceptAllOption: true,
+  multiple: false,
+};
 
-  // load backup resume data
-  const handleLoad = (event) => {
+const readJsonFile = async (file) => JSON.parse(await file.text());
+
+const LoadUnload = () => {
+  const { resumeData, loadedResume, loadResume, restoreLoadedResume } = useContext(ResumeContext);
+  const fileInputRef = useRef(null);
+
+  const loadFile = async (file, handle = null) => {
+    try {
+      loadResume(await readJsonFile(file), { file, handle });
+    } catch (error) {
+      console.error("Unable to load resume JSON", error);
+      alert(`Couldn't load "${file.name}": it is not a valid resume JSON file.`);
+    }
+  };
+
+  // Prefer the File System Access API: its handle lets Refresh re-read the
+  // file from disk after it was edited elsewhere.
+  const handleOpen = async () => {
+    if (typeof window !== "undefined" && window.showOpenFilePicker) {
+      try {
+        const [handle] = await window.showOpenFilePicker(JSON_PICKER_OPTIONS);
+        await loadFile(await handle.getFile(), handle);
+        return;
+      } catch (error) {
+        if (error.name === "AbortError") return;
+        console.error("File picker failed, falling back to file input", error);
+      }
+    }
+    fileInputRef.current?.click();
+  };
+
+  // Fallback for browsers without the File System Access API.
+  const handleInputChange = (event) => {
     const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const resumeData = JSON.parse(event.target.result);
-      setResumeData(resumeData);
-    };
-    reader.readAsText(file);
+    event.target.value = "";
+    if (file) loadFile(file);
+  };
+
+  const handleRefresh = async () => {
+    if (!loadedResume) return;
+    try {
+      if (loadedResume.handle) {
+        await loadFile(await loadedResume.handle.getFile(), loadedResume.handle);
+        return;
+      }
+      if (loadedResume.file) {
+        await loadFile(loadedResume.file);
+        return;
+      }
+    } catch (error) {
+      console.error("Unable to re-read resume file", error);
+    }
+    restoreLoadedResume();
   };
 
   // download resume data
@@ -31,20 +78,28 @@ const LoadUnload = () => {
     <div className="flex flex-wrap gap-4 mb-2 justify-center">
       <div className="inline-flex flex-row items-center gap-2">
         <h2 className="text-[1.2rem] text-white">Load Data</h2>
-        <label className="p-2 text-white bg-fuchsia-700 rounded cursor-pointer">
+        <button
+          type="button"
+          aria-label="Load Data"
+          className="p-2 text-white bg-fuchsia-700 rounded cursor-pointer"
+          onClick={handleOpen}
+        >
           <FaCloudUploadAlt className="text-[1.2rem] text-white" />
-          <input
-            aria-label="Load Data"
-            type="file"
-            className="hidden"
-            onChange={handleLoad}
-            accept=".json"
-          />
-        </label>
+        </button>
+        <input
+          ref={fileInputRef}
+          aria-hidden="true"
+          tabIndex={-1}
+          type="file"
+          className="hidden"
+          onChange={handleInputChange}
+          accept=".json,application/json"
+        />
       </div>
       <div className="inline-flex flex-row items-center gap-2">
         <h2 className="text-[1.2rem] text-white">Save Data</h2>
         <button
+          type="button"
           aria-label="Save Data"
           className="p-2 text-white bg-fuchsia-700 rounded"
           onClick={(event) =>
@@ -56,6 +111,19 @@ const LoadUnload = () => {
           }
         >
           <FaCloudDownloadAlt className="text-[1.2rem] text-white" />
+        </button>
+      </div>
+      <div className="inline-flex flex-row items-center gap-2">
+        <h2 className="text-[1.2rem] text-white">Refresh Data</h2>
+        <button
+          type="button"
+          aria-label="Refresh Data"
+          title={loadedResume ? `Re-read ${loadedResume.file?.name ?? "the loaded file"}` : "Load a file first"}
+          className="p-2 text-white bg-fuchsia-700 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+          onClick={handleRefresh}
+          disabled={!loadedResume}
+        >
+          <FaRedoAlt className="text-[1.2rem] text-white" />
         </button>
       </div>
     </div>

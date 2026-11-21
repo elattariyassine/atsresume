@@ -7,6 +7,7 @@ import Preview from "../components/preview/ui/Preview";
 import DefaultResumeData from "../components/utility/DefaultResumeData";
 import dynamic from "next/dynamic";
 import Form from "../components/form/ui/Form";
+import {normalizeResumeData} from "../components/utility/normalizeResumeData";
 
 const ResumeContext = createContext(DefaultResumeData);
 
@@ -17,7 +18,20 @@ const Print = dynamic(() => import("../components/utility/WinPrint"), {
 
 export default function Builder() {
   // resume data
-  const [resumeData, setResumeData] = useState(DefaultResumeData);
+  const [resumeData, setResumeData] = useState(() => normalizeResumeData(DefaultResumeData));
+
+  // last loaded resume file, so it can be re-read after external edits
+  const [loadedResume, setLoadedResumeState] = useState(null);
+
+  const loadResume = (data, source = {}) => {
+    const normalized = normalizeResumeData(data);
+    setLoadedResumeState({snapshot: normalized, ...source});
+    setResumeData(normalizeResumeData(normalized));
+  };
+
+  const restoreLoadedResume = () => {
+    if (loadedResume) setResumeData(normalizeResumeData(loadedResume.snapshot));
+  };
 
   // form hide/show
   const [formClose, setFormClose] = useState(false);
@@ -47,6 +61,9 @@ export default function Builder() {
         value={{
           resumeData,
           setResumeData,
+          loadedResume,
+          loadResume,
+          restoreLoadedResume,
           handleProfilePicture,
           handleChange,
         }}
